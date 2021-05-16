@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[2112]Awesom-O 4000'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 3661711400438135662, guid: 69e523e617a2bd346acb69bf7095311b,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: d3ffef2578d80e74b83130c616b79446, type: 3}
+  m_type: 2112
+  m_price: 8000
+  m_Hour: 72
+  m_hp: 4000
+  m_atk: 50
+  m_power: 320000003200000032000000
+  m_fire: 10
+  m_field: 0
+  m_anti: 0
+  m_range: 2
+  m_square: 3
+  m_formation:
+  - {x: -3, y: 0, z: 3}
+  - {x: 0, y: 0, z: 3}
+  - {x: 3, y: 0, z: 3}
+  - {x: -3, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -3, y: 0, z: -3}
+  - {x: 0, y: 0, z: -3}
+  - {x: 3, y: 0, z: -3}

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[1151]Papoy Unicorn'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 625503789114078185, guid: b41a509a7ed64c14388e9ead81f34ff7,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: 2b733bd3bd50c564a9cdfd03063b3770, type: 3}
+  m_type: 1151
+  m_price: 500000
+  m_Hour: 480
+  m_hp: 15900
+  m_atk: 770
+  m_power: 9a0000006b0800004d000000
+  m_fire: 6
+  m_field: 1
+  m_anti: 205
+  m_range: 0
+  m_square: 0
+  m_formation:
+  - {x: 0, y: 0, z: 0}

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[1042]Progne'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 2615665303160199022, guid: 2a88f6f3f2035e7419b125fb17b300fe,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: d406df518b222de45ba1d6fc4b8eea9f, type: 3}
+  m_type: 1042
+  m_price: 1201
+  m_Hour: 50
+  m_hp: 1790
+  m_atk: 0
+  m_power: 000000000000000000000000
+  m_fire: 0
+  m_field: 0
+  m_anti: 0
+  m_range: 0
+  m_square: 0
+  m_formation:
+  - {x: 0, y: 0, z: 0}

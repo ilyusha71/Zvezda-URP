@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[1062]Time Machine MK.II'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 2001764452772300408, guid: 7040c819f2d978d4683df6d1d6fb77f7,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: 7966314454db6124e88e91a03b791530, type: 3}
+  m_type: 1062
+  m_price: 70500
+  m_Hour: 160
+  m_hp: 1100
+  m_atk: 35
+  m_power: 0e000000070000004d000000
+  m_fire: 3
+  m_field: 2
+  m_anti: 304
+  m_range: 0
+  m_square: 0
+  m_formation:
+  - {x: 0, y: 0, z: 0}
+  - {x: 3.3, y: 0, z: 2.7}
+  - {x: -3.3, y: 0, z: -2.7}
+  - {x: -3.3, y: 0, z: 2.7}
+  - {x: 3.3, y: 0, z: -2.7}

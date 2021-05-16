@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[1111]Fast Food Man'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 879897355938721860, guid: c7674580b52e368458cb9f8a0f500cdc,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: a65642f1176bd2e488bffe6341713c4c, type: 3}
+  m_type: 1111
+  m_price: 440000
+  m_Hour: 290
+  m_hp: 9900
+  m_atk: 550
+  m_power: 4a010000a7030000a5000000
+  m_fire: 6
+  m_field: 0
+  m_anti: 203
+  m_range: 1
+  m_square: 0
+  m_formation:
+  - {x: 0, y: 0, z: 0}

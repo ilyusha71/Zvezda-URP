@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[1012]Monster Energy'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 8249615497803938153, guid: 8096f83bd1e80b04bb9e9467000909db,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: c9bb71f12ccf8354dbdc22cfc656aa66, type: 3}
+  m_type: 1012
+  m_price: 185000
+  m_Hour: 235
+  m_hp: 540
+  m_atk: 0
+  m_power: 000000000000000000000000
+  m_fire: 0
+  m_field: 0
+  m_anti: 0
+  m_range: 0
+  m_square: 0
+  m_formation:
+  - {x: 2, y: 0, z: 2}
+  - {x: -2, y: 0, z: -2}

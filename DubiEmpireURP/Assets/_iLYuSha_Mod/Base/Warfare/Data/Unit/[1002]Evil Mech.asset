@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[1002]Evil Mech'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 5710096088300075343, guid: 379015b670e424f42aae987e0fe2b24a,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: 20373499c738cc54c992aa970fff7d31, type: 3}
+  m_type: 1002
+  m_price: 335000
+  m_Hour: 297
+  m_hp: 960
+  m_atk: 0
+  m_power: 000000000000000000000000
+  m_fire: 0
+  m_field: 0
+  m_anti: 0
+  m_range: 0
+  m_square: 0
+  m_formation:
+  - {x: 0, y: 0, z: 0}

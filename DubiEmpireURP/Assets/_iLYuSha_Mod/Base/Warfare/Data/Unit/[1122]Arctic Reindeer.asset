@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8874cf457b92ebd4b9e3688fa3470e79, type: 3}
+  m_Name: '[1122]Arctic Reindeer'
+  m_EditorClassIdentifier: 
+  m_instance: {fileID: 4305622075063214551, guid: 35fa8554a29bc5d449af683c7924f03b,
+    type: 3}
+  m_sprite: {fileID: 21300000, guid: bd2c6b05e1d3b9b418f68a92aeef31ba, type: 3}
+  m_type: 1122
+  m_price: 12542
+  m_Hour: 424
+  m_hp: 12700
+  m_atk: 930
+  m_power: 8a02000074010000b8040000
+  m_fire: 10
+  m_field: 1
+  m_anti: 302
+  m_range: 2
+  m_square: 0
+  m_formation:
+  - {x: 0, y: 0, z: 0}

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbba39eaad241747b645ed3ecbb89ce, type: 3}
+  m_Name: '[1003]Wakaka Legion 4'
+  m_EditorClassIdentifier: 
+  m_index: 1003
+  m_faction: 10
+  m_legion: 3
+  m_squadron:
+  - m_texture: {fileID: 2800000, guid: 3c6cf63f9b42efa4a98fa717a7201683, type: 3}
+    type: 1051
+    data: {fileID: 11400000, guid: 0e808addbae77b44b8ba0ab2c505ea89, type: 2}
+    m_percent: 1
+  - m_texture: {fileID: 2800000, guid: 0e5c4215f05ae3f4493365d73cb3eb61, type: 3}
+    type: 2021
+    data: {fileID: 11400000, guid: 00f6fa1004a1fc9499efb3032304e17e, type: 2}
+    m_percent: 0.04
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0
+  - m_texture: {fileID: 0}
+    type: 0
+    data: {fileID: 0}
+    m_percent: 0

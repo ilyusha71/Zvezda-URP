@@ -1,0 +1,302 @@
+fileFormatVersion: 2
+guid: 467c2093c13cabf42917f9f3ec0f7cb2
+SketchUpImporter:
+  serializedVersion: 26
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Canyon
+    second: {fileID: 2100000, guid: 922391d70ca55dc498b3c67d3597a93a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glider Pad
+    second: {fileID: 2100000, guid: dab24c6b70add1148bc7b63951f08623, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: b5af09ff921e5d44394b5c16eae4c0b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Marble Cliff
+    second: {fileID: 2100000, guid: d702a1d5d4578994c80839a94373d04e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mossy Grass
+    second: {fileID: 2100000, guid: bf26d1cc4350b7e47b29c9d8764e301d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mountain 1
+    second: {fileID: 2100000, guid: f3f247d6e428ed8449e0630353245fca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mountain 2
+    second: {fileID: 2100000, guid: ca85264940e7cca4b855aee419b28cc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mountain 3
+    second: {fileID: 2100000, guid: ffb6b015b48581c49a5d8adc0bc00f77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mountain 4
+    second: {fileID: 2100000, guid: c41c37664c8ae6344a5714d8c82d511c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sandstone Cliff
+    second: {fileID: 2100000, guid: ec29d9cd611c5cb4d8033b13a5990ae7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Snow
+    second: {fileID: 2100000, guid: 8ca40a5150292f84c911e24bd2d4e632, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Splashing Water
+    second: {fileID: 2100000, guid: a5a65c8690dd5314096b86819a0bc3cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Waterfall
+    second: {fileID: 2100000, guid: 8497a3331dade4b4ea4ef00e9b3c4f7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[0020_Red]'
+    second: {fileID: 2100000, guid: 843454bee8a9f594f81b61055c1211e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[0128_White]'
+    second: {fileID: 2100000, guid: 8ddaa559d12e3b14fa1b56ee0c918ab4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[0137_Black]'
+    second: {fileID: 2100000, guid: 3d2449d1c33955240b4b747721a62f40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Asphalt_New]'
+    second: {fileID: 2100000, guid: a6a201b27a415e341901bd3831dbfe31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Concrete_Block_8x8_Gray]'
+    second: {fileID: 2100000, guid: 11cd256c03dd052468176311dc24d83a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Concrete_Stamped_Ashlar]'
+    second: {fileID: 2100000, guid: dfbd00cdf42e6b3418f0f5b04f3f6f39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _10
+    second: {fileID: 2100000, guid: 9c35d628240033548b269c82f612e07e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _11
+    second: {fileID: 2100000, guid: 813118de1e048c142be984ceac0c7404, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _defaultMat
+    second: {fileID: 2100000, guid: 23adf204dc9862a40a0aabe77755ee10, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 512x512_seamless_texture_10
+    second: {fileID: 2800000, guid: 49edd2f916598674982c4594a82ab129, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Asphalt_New_tint0x7A6D71FF
+    second: {fileID: 2800000, guid: ddcf00d42abcdfb40b83117b09a7c970, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Concrete_Block_8x8_Gray
+    second: {fileID: 2800000, guid: 9dc82bd9d5fdf984d9bf24a0244a30d6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Concrete_Form_4x8
+    second: {fileID: 2800000, guid: 7c585d1593f776b42a7ad2feb9ccd4e9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Concrete_Stamped_Ashlar
+    second: {fileID: 2800000, guid: b8621599a70f52a4c97b0cc650665c92, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Preview (1)
+    second: {fileID: 2800000, guid: a3798467b7ca2034b8741825d907f773, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ridged Canyon
+    second: {fileID: 2800000, guid: ddd1fc0baa6ad524cad2f395824bbac5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Snow_tint0xEAFFFFFF
+    second: {fileID: 2800000, guid: 22757010bde9d8b489fe8f8c1cde25ed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Stone_Marble
+    second: {fileID: 2800000, guid: b28256c63aa118c449f44bb083795f88, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Water_Pool_tint0x3E95A6FF
+    second: {fileID: 2800000, guid: 519b83ef40f14a0428957167a5e7db01, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Water_Pool_tint0x91A2A7FF
+    second: {fileID: 2800000, guid: 2be2e08c956b8d64b989a33180cfe386, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: grass_13
+    second: {fileID: 2800000, guid: 12126620b72f9714fa721898cd554d49, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: jungle grass textures 1500x1500 wallpaper_wallpaperswa.com_43
+    second: {fileID: 2800000, guid: 9ed6dcd2bb8892e438e6556c44d45b88, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rock_stones_0078_01_preview
+    second: {fileID: 2800000, guid: f59caff4175362e49ab77563781e8fb7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: seamless_tiled_stone_texture_by_lendrick (1)_tint0xA1999AFF
+    second: {fileID: 2800000, guid: 584560598daafac4ca5a92bae0075e98, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: stock-footage-wall-light-blue_tint0x005CCAFF
+    second: {fileID: 2800000, guid: b145f75c7e0188f46a6448c763b9ee71, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: texture11
+    second: {fileID: 2800000, guid: ce1a6d79d345fa44996627d03fcc5929, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: trlexe0x1205d4f1
+    second: {fileID: 2800000, guid: 544c1fee0a810774bae7d521b2a1dd8a, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0254
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.0254
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  generateBackFace: 1
+  mergeCoplanarFaces: 0
+  selectedNodes: 000000000100000002000000030000000400000005000000
+  assetHash:
+    serializedVersion: 2
+    Hash: 77b0fe1f7a583c5fe0abfe6ab59934ae
+  fileUnit: 0
