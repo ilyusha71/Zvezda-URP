@@ -26,7 +26,7 @@ namespace Warfare.Unit
                         string path = script.m_field == Field.Dubi ? "Assets/_iLYuSha_Mod/Design/Dubi/Prefabs/Design/" : "Assets/_iLYuSha_Mod/Design/Kocmocraft/Prefabs/Design/";
                         script.m_instance = AssetDatabase.LoadAssetAtPath<GameObject>(path + script.m_sprite.name + ".prefab");
                     }
-                    Database database = AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Unit/Database.asset");
+                    Database database = AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset");
                     if (!database.units.ContainsKey(script.m_type))
                     {
                         database.units.Add(script.m_type, script);
