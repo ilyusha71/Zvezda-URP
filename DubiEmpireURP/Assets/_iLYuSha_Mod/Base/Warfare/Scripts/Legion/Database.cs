@@ -8,9 +8,9 @@ namespace Warfare.Legion
     public class Database : ScriptableObject, ISerializationCallbackReceiver
     {
         public WarfareManager warfare;
-        [HideInInspector]
+        // [HideInInspector]
         public List<int> keyList = new List<int>();
-        [HideInInspector]
+        // [HideInInspector]
         public List<Legion.Model> valueList = new List<Legion.Model>();
         public Dictionary<int, Legion.Model> legions = new Dictionary<int, Legion.Model>();
 

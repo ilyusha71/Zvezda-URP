@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0207c333b6ca84994e56ed0cb38faf, type: 3}
   m_Name: Database
   m_EditorClassIdentifier: 
-  warfare: {fileID: 0}
-  keyList: 00000000010000000200000003000000e8030000e9030000eb030000ed030000b00400001405000016050000ac260000
+  warfare: {fileID: 11400000, guid: 32eb04487b0f50543b28e3bd373cae9b, type: 2}
+  keyList: 0000000001000000020000000300000004000000e8030000e9030000eb030000ed030000f1030000b00400001405000016050000ac260000
   valueList:
   - {fileID: 11400000, guid: e92dd72e7c883b04683877a2e38f685d, type: 2}
   - {fileID: 11400000, guid: 7e5790be4c3fad3439569bae9034d8da, type: 2}
   - {fileID: 11400000, guid: 63902bb06c4e8b24da5c547257574c11, type: 2}
   - {fileID: 11400000, guid: 82f6ad6202045964a87bcfe554585675, type: 2}
+  - {fileID: 11400000, guid: 311fc6c330d25484db36d1547f85cd93, type: 2}
   - {fileID: 11400000, guid: feb0e1f47fbf0094a9cb161d02d65747, type: 2}
   - {fileID: 11400000, guid: ccd95357ab260f841803a5451c93b3b2, type: 2}
   - {fileID: 11400000, guid: 36f098a313d65174c83e62147df9b5b9, type: 2}
   - {fileID: 11400000, guid: 89fe6dde608528b42833286c12682074, type: 2}
+  - {fileID: 11400000, guid: 2f43f10ac5bb6b24686d5900c7141300, type: 2}
   - {fileID: 11400000, guid: 4b9809f634f5eca4d8d1ae4d9dd6114d, type: 2}
   - {fileID: 11400000, guid: 8d0796b553552cd4dba78a6aedbd3963, type: 2}
   - {fileID: 11400000, guid: f0e7d6b9a8bfc704190c108c58135421, type: 2}

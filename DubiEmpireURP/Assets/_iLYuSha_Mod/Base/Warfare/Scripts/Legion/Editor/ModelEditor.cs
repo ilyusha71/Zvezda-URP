@@ -16,7 +16,7 @@ namespace Warfare.Legion
                 foreach (var script in scripts)
                 {
                     script.SetIndex();
-                    Database database = AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Legion/Database.asset");
+                    Database database = AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Legion/Database.asset");
                     string assetName = "[" + script.m_index.ToString() + "]" + script.m_faction.ToString() + " Legion " + (script.m_legion + 1);
                     if (!database.legions.ContainsKey(script.m_index))
                     {

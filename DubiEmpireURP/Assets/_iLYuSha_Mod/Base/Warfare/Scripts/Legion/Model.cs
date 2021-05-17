@@ -14,6 +14,7 @@ namespace Warfare.Legion
         public int m_legion;
         public SquadronInspector[] m_squadron = new SquadronInspector[13];
 
+#if UNITY_EDITOR
         public void SetIndex()
         {
             m_index = (int)m_faction * 100 + m_legion;
@@ -22,6 +23,7 @@ namespace Warfare.Legion
                 m_squadron[i].SetUnit();
             }
         }
+#endif
         // public Squadron[] GetSquadrons()
         // {
         //     Squadron[] squadrons = new Squadron[13];
@@ -43,12 +45,13 @@ namespace Warfare.Legion
         [Range(0f, 1f)]
         public float m_percent = 1.0f;
 
+#if UNITY_EDITOR
         public void SetUnit()
         {
             if (m_texture)
             {
                 type = (Unit.Type)int.Parse(m_texture.name.Split(new char[2] { '[', ']' })[1]);
-                data = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Unit/Database.asset").units[type];
+                data = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset").units[type];
             }
             else
             {
@@ -57,6 +60,7 @@ namespace Warfare.Legion
             }
 
         }
+#endif
         public int Stack
         {
             get
