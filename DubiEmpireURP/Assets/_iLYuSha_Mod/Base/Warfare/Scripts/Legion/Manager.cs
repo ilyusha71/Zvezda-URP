@@ -159,10 +159,10 @@ namespace Warfare.Legion
         public void RegisterReserveUnit(Unit.BattleModel unit)
         {
             Toggle btn = Instantiate(prefabUnitButton, reserveGroup).GetComponent<Toggle>();
-            btn.gameObject.name = unit.model.Type.ToString();
+            btn.gameObject.name = unit.property.Type.ToString();
             btn.group = btn.GetComponentInParent<ToggleGroup>();
-            btn.GetComponent<Image>().sprite = unit.model.Sprite;
-            btn.GetComponentsInChildren<TextMeshProUGUI>()[0].text = unit.model.Field == Unit.Field.Dubi ? "x " + unit.UnitCount().ToString() : unit.data.HP.ToString();
+            btn.GetComponent<Image>().sprite = unit.property.Sprite;
+            btn.GetComponentsInChildren<TextMeshProUGUI>()[0].text = unit.property.Field == Unit.Field.Dubi ? "x " + unit.UnitCount().ToString() : unit.data.HP.ToString();
             listReserveUnits.Add(btn);
             btn.onValueChanged.AddListener(isOn =>
            {
@@ -171,15 +171,15 @@ namespace Warfare.Legion
                    unitSelected = unit;
                    btnSelected = btn;
 
-                   grids[0].avatar.sprite = unit.model.Sprite;
+                   grids[0].avatar.sprite = unit.property.Sprite;
                    grids[0].textType.text = Naming.Type(unit.data.Type);
-                   grids[0].textFire.text = unit.model.FireRate.ToString();
-                   grids[0].textRange.text = Naming.Range(unit.model.Range);
+                   grids[0].textFire.text = unit.property.FireRate.ToString();
+                   grids[0].textRange.text = Naming.Range(unit.property.Range);
                    grids[0].textHP.text = unit.data.HP.ToString();
                    grids[0].textCount.text = unit.UnitCount().ToString();
-                   grids[0].textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();
-                   grids[0].textMech.text = (unit.UnitCount() * unit.model.ATK[1]).ToString();
-                   grids[0].textAir.text = (unit.UnitCount() * unit.model.ATK[2]).ToString();
+                   grids[0].textDubi.text = (unit.UnitCount() * unit.property.ATK[0]).ToString();
+                   grids[0].textMech.text = (unit.UnitCount() * unit.property.ATK[1]).ToString();
+                   grids[0].textAir.text = (unit.UnitCount() * unit.property.ATK[2]).ToString();
                }
            });
             btn.transform.localScale = Vector3.one;

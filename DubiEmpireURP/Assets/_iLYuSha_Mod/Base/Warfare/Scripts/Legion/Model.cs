@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Warfare.Legion
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "Warfare/Legion/Create Warfare Legion Data")]
+    [CreateAssetMenu(fileName = "Data", menuName = "Warfare/Legion/Create Data")]
     public class Model : ScriptableObject
     {
         public int m_index;
@@ -24,16 +24,6 @@ namespace Warfare.Legion
             }
         }
 #endif
-        // public Squadron[] GetSquadrons()
-        // {
-        //     Squadron[] squadrons = new Squadron[13];
-        //     for (int i = 0; i < squadrons.Length; i++)
-        //     {
-        //         squadrons[i].model.Type = m_squadron[i].type;
-        //         squadrons[i].hp = m_squadron[i].Stack * m_squadron[i].data.model.m_hp;
-        //     }
-        //     return squadrons;
-        // }
     }
 
     [System.Serializable]
@@ -41,7 +31,7 @@ namespace Warfare.Legion
     {
         public Texture m_texture;
         public Unit.Type type;
-        public Unit.Property data;
+        public Unit.Model data;
         [Range(0f, 1f)]
         public float m_percent = 1.0f;
 
@@ -109,6 +99,10 @@ namespace Warfare.Legion
         }
         public void Rearrange(int wave)
         {
+            // Range list for enermy fire
+            // 0 = short range
+            // 1 = medium range
+            // 2 = long range
             for (int i = 0; i < rangeList.Length; i++)
             {
                 rangeList[i] = new List<Unit.BattleModel>();
@@ -121,6 +115,7 @@ namespace Warfare.Legion
                 {
                     if (this.squadron.ContainsKey(row * 3 + column))
                     {
+                        // 內部迴圈是針對同列的單位都能加入正確的射程列表
                         for (int order = 0; order < 3; order++)
                         {
                             int index = row * 3 + order;
@@ -134,7 +129,7 @@ namespace Warfare.Legion
                             }
                         }
                         range++;
-                        break;
+                        break; // 已經檢查完同列的單位直接跳出column迴圈
                     }
                 }
             }
@@ -149,33 +144,33 @@ namespace Warfare.Legion
                 if (wave > 1 && rangeList[side + 3].Count == 0)
                     rangeList[side + 3] = rangeList[0];
             }
-
-            // Debug.LogWarning(" ----------------------------");
-            // for (int i = 0; i < 5; i++)
-            // {
-            //     int c = rangeList[i].Count;
-            //     Debug.LogWarning("Range " + i);
-            //     for (int k = 0; k < c; k++)
-            //     {
-            //         Debug.Log(rangeList[i][k].order);
-
-            //     }
-            // }
         }
     }
-    [System.Serializable]
-    public class Squadron
-    {
-        public Unit.Model model;
-        public int hp, level, exp;
+    // [System.Serializable]
+    // public class Squadron
+    // {
+    //     public Unit.Property model;
+    //     public int hp, level, exp;
 
-        public int UnitCount
-        {
-            get { return Mathf.CeilToInt((float)hp / model.HP); }
-        }
-        public int TotalDamage(Unit.Field field)
-        {
-            return UnitCount * model.ATK[(int)field];
-        }
+    //     public int UnitCount
+    //     {
+    //         get { return Mathf.CeilToInt((float)hp / model.HP); }
+    //     }
+    //     public int TotalDamage(Unit.Field field)
+    //     {
+    //         return UnitCount * model.ATK[(int)field];
+    //     }
+    // }
+
+    public enum Faction
+    {
+        Experimental = 0,
+        Wakaka = 10,
+        NO1 = 11,
+        NO2 = 12,
+        NO3 = 13,
+        NO4 = 14,
+        NO5 = 15,
+        Reserve = 99,
     }
 }

@@ -21,7 +21,7 @@ MonoBehaviour:
   m_hp: 1560
   m_atk: 0
   m_power: 000000000000000000000000
-  m_fire: 0
+  m_fire: 3
   m_field: 0
   m_anti: 0
   m_range: 0

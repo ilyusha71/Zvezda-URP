@@ -2,6 +2,6 @@
 
 namespace Warfare.Legion
 {
-    [CreateAssetMenu(fileName = "Warfare Legion Database", menuName = "Warfare/Legion/Create Warfare Legion Database")]
+    [CreateAssetMenu(fileName = "Database", menuName = "Warfare/Legion/Create Warfare Legion Database")]
     public class Database : Database<int, Model> { }
 }

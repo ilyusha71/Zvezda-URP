@@ -73,15 +73,15 @@ namespace Warfare
                 Debug.LogError("QQ");
             audioSource.PlayOneShot(clipHover);
             gridSprite.color = enterColor;
-            avatar.sprite = unit.model.Sprite;
+            avatar.sprite = unit.property.Sprite;
             textType.text = Naming.Type(unit.data.Type);
-            textFire.text = unit.model.FireRate.ToString();
-            textRange.text = Naming.Range(unit.model.Range);
+            textFire.text = unit.property.FireRate.ToString();
+            textRange.text = Naming.Range(unit.property.Range);
             textHP.text = unit.data.HP.ToString();
             textCount.text = unit.UnitCount().ToString();
-            textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();
-            textMech.text = (unit.UnitCount() * unit.model.ATK[1]).ToString();
-            textAir.text = (unit.UnitCount() * unit.model.ATK[2]).ToString();
+            textDubi.text = (unit.UnitCount() * unit.property.ATK[0]).ToString();
+            textMech.text = (unit.UnitCount() * unit.property.ATK[1]).ToString();
+            textAir.text = (unit.UnitCount() * unit.property.ATK[2]).ToString();
         }
         void OnMouseOver()
         {
@@ -90,9 +90,9 @@ namespace Warfare
                 Debug.LogError("QQ");
             textHP.text = unit.data.HP.ToString();
             textCount.text = unit.UnitCount().ToString();
-            textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();
-            textMech.text = (unit.UnitCount() * unit.model.ATK[1]).ToString();
-            textAir.text = (unit.UnitCount() * unit.model.ATK[2]).ToString();
+            textDubi.text = (unit.UnitCount() * unit.property.ATK[0]).ToString();
+            textMech.text = (unit.UnitCount() * unit.property.ATK[1]).ToString();
+            textAir.text = (unit.UnitCount() * unit.property.ATK[2]).ToString();
         }
         void OnMouseExit()
         {
@@ -167,20 +167,20 @@ namespace Warfare
             }
             this.unit = unit;
             unit.order = Order;
-            int[] array = new int[unit.model.UnitCount(unit.data.HP)]; // 目前數量
-            int[] array2 = new int[unit.model.Formation.Length]; // 最大數量
+            int[] array = new int[unit.property.UnitCount(unit.data.HP)]; // 目前數量
+            int[] array2 = new int[unit.property.Formation.Length]; // 最大數量
             for (int i = 0; i < array2.Length; i++)
             {
                 array2[i] = 1; // 取得權重，各位置權重相同
             }
             for (int j = 0; j < array.Length; j++)
             {
-                int lotteryIndex = unit.model.Field == Unit.Field.Dubi ? GetLotteryIndex(array2) : j; // 只有Dubi要抽位置
+                int lotteryIndex = unit.property.Field == Unit.Field.Dubi ? GetLotteryIndex(array2) : j; // 只有Dubi要抽位置
 
                 if (state == GridState.Foe)
-                    stacks.Add(lotteryIndex, Instantiate(unit.model.Instance, transform.position + unit.model.Formation[unit.model.Formation.Length - 1 - lotteryIndex] * 1, Quaternion.Euler(0, 180, 0)));
+                    stacks.Add(lotteryIndex, Instantiate(unit.property.Instance, transform.position + unit.property.Formation[unit.property.Formation.Length - 1 - lotteryIndex] * 1, Quaternion.Euler(0, 180, 0)));
                 else
-                    stacks.Add(lotteryIndex, Instantiate(unit.model.Instance, transform.position + unit.model.Formation[lotteryIndex] * 1, Quaternion.identity));
+                    stacks.Add(lotteryIndex, Instantiate(unit.property.Instance, transform.position + unit.property.Formation[lotteryIndex] * 1, Quaternion.identity));
                 array2[lotteryIndex] = 0; // 抽中後將權重改為0
             }
             if (state != GridState.Deploy)

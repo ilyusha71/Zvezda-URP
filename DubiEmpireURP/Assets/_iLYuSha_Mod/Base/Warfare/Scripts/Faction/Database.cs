@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Warfare.Kingdom
+namespace Warfare.Faction
 {
-    [CreateAssetMenu(fileName = "Warfare Kingdom Database", menuName = "Warfare/Kingdom/Create Warfare Kingdom Database")]
-    public class Database : Database<int, int> { }
+    [CreateAssetMenu(fileName = "Database", menuName = "Warfare/Faction/Create Database")]
+    public class Database : Database<int, Model> { }
 }

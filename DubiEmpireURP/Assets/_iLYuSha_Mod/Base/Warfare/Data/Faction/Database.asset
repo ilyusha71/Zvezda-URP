@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 014d4d0e90cb2e6498de214a05da5b99, type: 3}
-  m_Name: Warfare Kingdom Database
+  m_Name: Database
   m_EditorClassIdentifier: 
   keyList: 
   valueList: 

@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Warfare.Kingdom
+namespace Warfare.Faction
 {
     public class DatabaseEditor : EditorWindow
     {
@@ -17,7 +17,7 @@ namespace Warfare.Kingdom
         {
             var window = EditorWindow.GetWindow<DatabaseEditor>(false, "Faction Database", true);
             window.warfare = UnityEditor.AssetDatabase.LoadAssetAtPath<WarfareManager>("Assets/_iLYuSha_Mod/Base/Warfare/Warfare Manager.asset");
-            window.database = UnityEditor.AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset");
+            window.database = UnityEditor.AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Faction/Database.asset");
             window.editor = Editor.CreateEditor(window.database);
         }
         public void OnGUI()

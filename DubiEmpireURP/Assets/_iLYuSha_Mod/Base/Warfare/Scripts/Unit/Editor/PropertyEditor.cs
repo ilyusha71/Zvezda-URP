@@ -5,12 +5,12 @@ using UnityEngine;
 namespace Warfare.Unit
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(Property))]
+    [CustomEditor(typeof(Model))]
     public class PropertyEditor : Editor
     {
         public override void OnInspectorGUI()
         {
-            var scripts = targets.OfType<Property>();
+            var scripts = targets.OfType<Model>();
             if (GUILayout.Button("Join Database"))
             {
                 foreach (var script in scripts)

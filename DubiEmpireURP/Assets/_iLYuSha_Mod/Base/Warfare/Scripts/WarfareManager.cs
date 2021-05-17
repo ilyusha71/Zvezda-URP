@@ -12,7 +12,7 @@ namespace Warfare
         public Legion.Database legionDB;
         public Unit.Database unitDB;
         public PlayerData playerData;
-        public Dictionary<int, Unit.Model> unitModels = new Dictionary<int, Unit.Model> ();
+        public Dictionary<int, Unit.Property> unitModels = new Dictionary<int, Unit.Property> ();
         public Dictionary<int, Legion.BattleModel> legions = new Dictionary<int, Legion.BattleModel> ();
         public List<Unit.BattleModel> units = new List<Unit.BattleModel> ();
 
@@ -22,7 +22,7 @@ namespace Warfare
             int count = unitDB.data.Count;
             for (int i = 0; i < count; i++)
             {
-                Unit.Model model = new Unit.Model (unitDB.valueList[i]);
+                Unit.Property model = new Unit.Property (unitDB.valueList[i]);
                 unitModels.Add ((int) unitDB.keyList[i], model);
             }
             Debug.Log ("<color=yellow>" + unitModels.Count + " MasterModel</color> has been <color=lime>Updated</color>.");
@@ -226,18 +226,6 @@ namespace Warfare
     {
         public Dictionary<int, Legion.Data> legions = new Dictionary<int, Legion.Data> ();
         public List<Unit.Data> units = new List<Unit.Data> ();
-    }
-
-    public enum Faction
-    {
-        Experimental = 0,
-        Wakaka = 10,
-        NO1 = 11,
-        NO2 = 12,
-        NO3 = 13,
-        NO4 = 14,
-        NO5 = 15,
-        Reserve = 99,
     }
 
     public static class Naming
