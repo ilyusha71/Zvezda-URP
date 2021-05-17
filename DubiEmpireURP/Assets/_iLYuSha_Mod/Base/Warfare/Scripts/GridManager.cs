@@ -74,9 +74,9 @@ namespace Warfare
             audioSource.PlayOneShot(clipHover);
             gridSprite.color = enterColor;
             avatar.sprite = unit.model.Sprite;
-            textType.text = Property.Type(unit.data.Type);
+            textType.text = Naming.Type(unit.data.Type);
             textFire.text = unit.model.FireRate.ToString();
-            textRange.text = Property.Range(unit.model.Range);
+            textRange.text = Naming.Range(unit.model.Range);
             textHP.text = unit.data.HP.ToString();
             textCount.text = unit.UnitCount().ToString();
             textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();

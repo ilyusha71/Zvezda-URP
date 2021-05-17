@@ -240,7 +240,7 @@ namespace Warfare
         Reserve = 99,
     }
 
-    public static class Property
+    public static class Naming
     {
         public static string Type (int type)
         {

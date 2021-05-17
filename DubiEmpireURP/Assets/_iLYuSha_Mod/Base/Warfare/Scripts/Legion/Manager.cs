@@ -172,9 +172,9 @@ namespace Warfare.Legion
                    btnSelected = btn;
 
                    grids[0].avatar.sprite = unit.model.Sprite;
-                   grids[0].textType.text = Property.Type(unit.data.Type);
+                   grids[0].textType.text = Naming.Type(unit.data.Type);
                    grids[0].textFire.text = unit.model.FireRate.ToString();
-                   grids[0].textRange.text = Property.Range(unit.model.Range);
+                   grids[0].textRange.text = Naming.Range(unit.model.Range);
                    grids[0].textHP.text = unit.data.HP.ToString();
                    grids[0].textCount.text = unit.UnitCount().ToString();
                    grids[0].textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();
