@@ -51,7 +51,7 @@ namespace Warfare.Legion
             if (m_texture)
             {
                 type = (Unit.Type)int.Parse(m_texture.name.Split(new char[2] { '[', ']' })[1]);
-                data = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset").units[type];
+                data = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset").data[type];
             }
             else
             {

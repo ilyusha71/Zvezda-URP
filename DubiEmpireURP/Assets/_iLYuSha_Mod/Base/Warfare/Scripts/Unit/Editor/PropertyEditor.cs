@@ -27,17 +27,17 @@ namespace Warfare.Unit
                         script.m_instance = AssetDatabase.LoadAssetAtPath<GameObject>(path + script.m_sprite.name + ".prefab");
                     }
                     Database database = AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset");
-                    if (!database.units.ContainsKey(script.m_type))
+                    if (!database.data.ContainsKey(script.m_type))
                     {
-                        database.units.Add(script.m_type, script);
+                        database.data.Add(script.m_type, script);
                         Debug.Log("<color=yellow>" + script.m_type.ToString() + "</color> has been <color=lime>Joined</color>.");
                         AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(script), script.m_instance.name);
                     }
                     else
                     {
-                        if (database.units[script.m_type].name != script.m_instance.name)
+                        if (database.data[script.m_type].name != script.m_instance.name)
                         {
-                            database.units[script.m_type] = script;
+                            database.data[script.m_type] = script;
                             Debug.Log("<color=yellow>" + script.m_type.ToString() + "</color> has been <color=cyan>Updated</color>.");
                             AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(script), script.m_instance.name);
                         }

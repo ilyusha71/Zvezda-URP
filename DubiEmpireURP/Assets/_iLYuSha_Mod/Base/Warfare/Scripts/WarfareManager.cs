@@ -19,7 +19,7 @@ namespace Warfare
         public void MasterModelCollector ()
         {
             unitModels.Clear ();
-            int count = unitDB.units.Count;
+            int count = unitDB.data.Count;
             for (int i = 0; i < count; i++)
             {
                 Unit.Model model = new Unit.Model (unitDB.valueList[i]);
@@ -30,7 +30,7 @@ namespace Warfare
         public void SynchronizeLegionsToPlayerData ()
         {
             playerData.legions.Clear ();
-            Dictionary<int, Legion.Model> legions = legionDB.legions;
+            Dictionary<int, Legion.Model> legions = legionDB.data;
             List<int> keys = legions.Keys.ToList ();
             int dataCount = keys.Count;
             for (int index = 0; index < dataCount; index++)
@@ -58,7 +58,7 @@ namespace Warfare
         }
         public void SynchronizeLegionToPlayerData (int index)
         {
-            Dictionary<int, Legion.Model> legions = legionDB.legions;
+            Dictionary<int, Legion.Model> legions = legionDB.data;
             int id = index;
             Legion.Data legion = new Legion.Data (id);
             if (playerData.legions.ContainsKey (id))
@@ -81,7 +81,7 @@ namespace Warfare
         }
         public void SynchronizeLegionSquadronToPlayerData (int index, int order)
         {
-            Dictionary<int, Legion.Model> legions = legionDB.legions;
+            Dictionary<int, Legion.Model> legions = legionDB.data;
             int id = index;
             Legion.Data legion;
             if (playerData.legions.ContainsKey (id))
@@ -105,7 +105,7 @@ namespace Warfare
         public void SynchronizeUnitsToPlayerData ()
         {
             playerData.units.Clear ();
-            Dictionary<int, Legion.Model> legions = legionDB.legions;
+            Dictionary<int, Legion.Model> legions = legionDB.data;
             List<int> keys = legions.Keys.ToList ();
             int dataCount = keys.Count;
             for (int index = 0; index < dataCount; index++)

@@ -10,61 +10,61 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccbba39eaad241747b645ed3ecbb89ce, type: 3}
-  m_Name: '[1009]Wakaka Legion 10'
+  m_Name: '[1404]NO4 Legion 5'
   m_EditorClassIdentifier: 
-  m_index: 1009
-  m_faction: 10
-  m_legion: 9
+  m_index: 1404
+  m_faction: 14
+  m_legion: 4
   m_squadron:
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
-    m_percent: 0
+    m_percent: 1

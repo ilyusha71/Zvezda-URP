@@ -50,7 +50,7 @@ namespace Warfare.Unit
 
                 GUI.skin.label.fontStyle = FontStyle.Bold;
                 GUI.contentColor = Color.cyan;
-                GUILayout.Label(database.units.Count.ToString(), GUILayout.Width(50));
+                GUILayout.Label(database.data.Count.ToString(), GUILayout.Width(50));
 
                 GUI.backgroundColor = Color.red;
                 GUI.contentColor = Color.white;
@@ -94,7 +94,7 @@ namespace Warfare.Unit
             GUILayout.EndHorizontal();
 
             GUILayout.Space(5);
-            foreach (KeyValuePair<Unit.Type, Unit.Property> unit in database.units.ToList())
+            foreach (KeyValuePair<Unit.Type, Unit.Property> unit in database.data.ToList())
             {
                 if (unit.Key == Unit.Type.Dave)
                 {

@@ -48,7 +48,7 @@ namespace Warfare.Legion
 
                 GUI.skin.label.fontStyle = FontStyle.Bold;
                 GUI.contentColor = Color.cyan;
-                GUILayout.Label(database.legions.Count.ToString(), GUILayout.Width(50));
+                GUILayout.Label(database.data.Count.ToString(), GUILayout.Width(50));
 
                 GUI.backgroundColor = Color.red;
                 GUI.contentColor = Color.white;
@@ -64,7 +64,7 @@ namespace Warfare.Legion
 
             GUILayout.Space(10);
             EditorGUIUtility.labelWidth = 10;
-            foreach (KeyValuePair<int, Legion.Model> legion in database.legions.ToList())
+            foreach (KeyValuePair<int, Legion.Model> legion in database.data.ToList())
             {
                 // Faction Title
                 if (legion.Key % 10 == 0)
