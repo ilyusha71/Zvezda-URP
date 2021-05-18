@@ -150,6 +150,7 @@ namespace Warfare.Legion
         public Texture m_texture;
         public Unit.Type type;
         public Unit.Info info;
+        public Unit.Model model;
         [Range(0f, 1f)]
         public float m_percent = 1.0f;
 
@@ -160,11 +161,13 @@ namespace Warfare.Legion
             {
                 type = (Unit.Type)int.Parse(m_texture.name.Split(new char[2] { '[', ']' })[1]);
                 info = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset").data[type];
+                model = new Unit.Model(info);
             }
             else
             {
                 type = Unit.Type.None;
                 info = null;
+                model = null;
             }
             // Debug.Log("sd");
             // if (data != null) // 臨時修改
@@ -175,11 +178,15 @@ namespace Warfare.Legion
         {
             get
             {
-                return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(info.m_formation.Length * m_percent));
+                // return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(info.m_formation.Length * m_percent));
+                return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(model.Formation.Length * m_percent));
+
             }
             set
             {
-                m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / info.m_formation.Length);
+                // m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / info.m_formation.Length);
+                m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / model.Formation.Length);
+
             }
         }
         public int HP

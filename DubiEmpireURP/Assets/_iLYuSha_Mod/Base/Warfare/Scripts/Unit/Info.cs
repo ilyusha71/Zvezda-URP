@@ -166,6 +166,7 @@ namespace Warfare.Unit
             }
         }
     }
+     [System.Serializable]
     public class Model
     {
         public Model (Info info)
