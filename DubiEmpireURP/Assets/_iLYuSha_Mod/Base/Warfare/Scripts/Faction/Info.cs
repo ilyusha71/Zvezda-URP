@@ -7,14 +7,14 @@ using UnityEngine.UI;
 namespace Warfare.Faction
 {
     [CreateAssetMenu(fileName = "Data", menuName = "Warfare/Faction/Create Data")]
-    public class Model : ScriptableObject
+    public class Info : ScriptableObject
     {
         public Type m_type;
         public int m_index;
         public string m_name;
         public int m_capital;
         public int[] m_towns;
-        public Legion.Model[] m_legions;
+        public Legion.Info[] m_legions;
 
 #if UNITY_EDITOR
         public void SetIndex()

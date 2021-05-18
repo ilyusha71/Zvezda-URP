@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace Warfare.Unit
 {
     [CreateAssetMenu (fileName = "Data", menuName = "Warfare/Unit/Create Data")]
-    public class Model : ScriptableObject
+    public class Info : ScriptableObject
     {
         public GameObject m_instance;
         public Sprite m_sprite;
@@ -166,23 +166,23 @@ namespace Warfare.Unit
             }
         }
     }
-    public class Property
+    public class Model
     {
-        public Property (Model model)
+        public Model (Info info)
         {
-            Instance = model.m_instance;
-            Sprite = model.m_sprite;
-            Type = model.m_type;
-            Price = model.m_price;
-            Hour = model.m_Hour;
-            HP = model.m_hp;
-            FireRate = model.m_fire;
-            ATK = model.m_power;
-            Field = model.m_field;
-            Anti = model.m_anti;
-            Range = model.m_range;
-            Square = model.m_square;
-            Formation = model.m_formation;
+            Instance = info.m_instance;
+            Sprite = info.m_sprite;
+            Type = info.m_type;
+            Price = info.m_price;
+            Hour = info.m_Hour;
+            HP = info.m_hp;
+            FireRate = info.m_fire;
+            ATK = info.m_power;
+            Field = info.m_field;
+            Anti = info.m_anti;
+            Range = info.m_range;
+            Square = info.m_square;
+            Formation = info.m_formation;
         }
         public GameObject Instance { get; private set; }
         public Sprite Sprite { get; private set; }
@@ -202,7 +202,6 @@ namespace Warfare.Unit
             return Mathf.CeilToInt (hp / HP);
         }
     }
-
     [System.Serializable]
     public class Data
     {
@@ -214,17 +213,17 @@ namespace Warfare.Unit
     public class DataModel
     {
         public Data data;
-        public Property property;
+        public Model model;
 
         public DataModel () { }
-        public DataModel (Property property, Data data)
+        public DataModel (Model model, Data data)
         {
-            this.property = property;
+            this.model = model;
             this.data = data;
         }
         public int UnitCount ()
         {
-            return property.UnitCount (data.HP);
+            return model.UnitCount (data.HP);
         }
     }
     public class BattleModel : DataModel
@@ -235,15 +234,15 @@ namespace Warfare.Unit
         public Range hitRange;
         public int countDestroy, countHit;
 
-        public BattleModel (int order, Property model, Data data)
+        public BattleModel (int order, Model model, Data data)
         {
             this.order = order;
-            this.property = model;
+            this.model = model;
             this.data = data;
         }
         public bool Fire (int action, List<Unit.BattleModel>[] rangeList)
         {
-            if (action % property.FireRate != 0) return false;
+            if (action % model.FireRate != 0) return false;
             if (target != null)
                 if (target.data.HP == 0) target = null;
             if (target == null)
@@ -254,14 +253,14 @@ namespace Warfare.Unit
                     target = rangeList[4][Random.Range (0, rangeList[3].Count)];
                 else
                 {
-                    List<Unit.BattleModel> list = rangeList[(int) property.Range];
+                    List<Unit.BattleModel> list = rangeList[(int) model.Range];
                     target = list[Random.Range (0, list.Count)];
                 }
             }
-            target.hitRange = (Range) Mathf.Max ((int) target.hitRange, (int) property.Range);
+            target.hitRange = (Range) Mathf.Max ((int) target.hitRange, (int) model.Range);
             target.totalFire++;
-            target.totalAttackers += property.UnitCount (data.HP);
-            target.totalDamage += property.UnitCount (data.HP) * property.ATK[(int) target.property.Field];
+            target.totalAttackers += model.UnitCount (data.HP);
+            target.totalDamage += model.UnitCount (data.HP) * model.ATK[(int) target.model.Field];
             return true;
         }
         public bool ActionResult ()

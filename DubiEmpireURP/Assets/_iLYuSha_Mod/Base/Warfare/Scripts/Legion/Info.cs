@@ -7,10 +7,11 @@ using UnityEngine.UI;
 namespace Warfare.Legion
 {
     [CreateAssetMenu(fileName = "Data", menuName = "Warfare/Legion/Create Data")]
-    public class Model : ScriptableObject
+    public class Info : ScriptableObject
     {
         public int m_index;
         public Faction m_faction;
+        public Type m_type;
         public int m_legion;
         public SquadronInspector[] m_squadron = new SquadronInspector[13];
 
@@ -25,51 +26,30 @@ namespace Warfare.Legion
         }
 #endif
     }
-
-    [System.Serializable]
-    public class SquadronInspector
+    public class Model
     {
-        public Texture m_texture;
-        public Unit.Type type;
-        public Unit.Model data;
-        [Range(0f, 1f)]
-        public float m_percent = 1.0f;
+        public Model(Info info)
+        {
+            Faction = info.m_faction;
+            Type = info.m_type;
 
-#if UNITY_EDITOR
-        public void SetUnit()
-        {
-            if (m_texture)
+            for (int order = 0; order < info.m_squadron.Length; order++)
             {
-                type = (Unit.Type)int.Parse(m_texture.name.Split(new char[2] { '[', ']' })[1]);
-                data = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset").data[type];
-            }
-            else
-            {
-                type = Unit.Type.None;
-                data = null;
-            }
-
-        }
-#endif
-        public int Stack
-        {
-            get
-            {
-                return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(data.m_formation.Length * m_percent));
-            }
-            set
-            {
-                m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / data.m_formation.Length);
+                int type = (int)info.m_squadron[order].type;
+                if (type == 0)
+                    continue;
+                Unit.Data unit = new Unit.Data();
+                unit.Type = type;
+                unit.HP = info.m_squadron[order].HP;
+                // 還需要補齊 Level Exp
+                Squadron.Add(order, unit);
             }
         }
-        public int HP
-        {
-            get
-            {
-                return Stack * data.m_hp;
-            }
-        }
+        public Faction Faction { get; private set; }
+        public Type Type { get; private set; }
+        public Dictionary<int, Unit.Data> Squadron = new Dictionary<int, Unit.Data>();
     }
+
     [System.Serializable]
     public class Data
     {
@@ -162,6 +142,52 @@ namespace Warfare.Legion
     //     }
     // }
 
+
+
+    [System.Serializable]
+    public class SquadronInspector
+    {
+        public Texture m_texture;
+        public Unit.Type type;
+        public Unit.Info data;
+        [Range(0f, 1f)]
+        public float m_percent = 1.0f;
+
+#if UNITY_EDITOR
+        public void SetUnit()
+        {
+            if (m_texture)
+            {
+                type = (Unit.Type)int.Parse(m_texture.name.Split(new char[2] { '[', ']' })[1]);
+                data = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset").data[type];
+            }
+            else
+            {
+                type = Unit.Type.None;
+                data = null;
+            }
+
+        }
+#endif
+        public int Stack
+        {
+            get
+            {
+                return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(data.m_formation.Length * m_percent));
+            }
+            set
+            {
+                m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / data.m_formation.Length);
+            }
+        }
+        public int HP
+        {
+            get
+            {
+                return Stack * data.m_hp;
+            }
+        }
+    }
     public enum Faction
     {
         Experimental = 0,
@@ -172,5 +198,17 @@ namespace Warfare.Legion
         NO4 = 14,
         NO5 = 15,
         Reserve = 99,
+    }
+    public enum Type
+    {
+        Scout = 0, // 偵查
+        Light = 1, // 輕型
+        Mech = 2, // 機械
+        Aviation = 3, // 航空
+        Light2 = 11, // 宣戰時期 輕型
+        Mech2 = 12, // 宣戰時期 機械
+        Aviation2 = 13, // 宣戰時期 航空
+        Capital = 101, // 宣戰時期 主力軍
+        Reserve = 102, // 宣戰時期  預備
     }
 }

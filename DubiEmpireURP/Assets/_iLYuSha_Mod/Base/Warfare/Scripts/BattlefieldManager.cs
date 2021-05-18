@@ -45,7 +45,7 @@ namespace Warfare
         void Awake()
         {
             windowTips.SetActive(false);
-            warfare.MasterModelCollector();
+            warfare.InitializeUnitProperty();
             warfare.SynchronizeLegionsToPlayerData();
             warfare.SynchronizeUnitsToPlayerData();
             warfare.ConverseLegionBattleModel();
@@ -137,7 +137,7 @@ namespace Warfare
                             else if (grid.Order > 8)
                                 targetList = battle.legions[1].rangeList[4];
                             else
-                                targetList = battle.legions[1].rangeList[(int)grid.unit.property.Range];
+                                targetList = battle.legions[1].rangeList[(int)grid.unit.model.Range];
 
                             int count = targetList.Count;
                             for (int i = 0; i < count; i++)

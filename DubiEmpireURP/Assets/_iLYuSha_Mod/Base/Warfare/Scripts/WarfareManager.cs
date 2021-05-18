@@ -12,25 +12,26 @@ namespace Warfare
         public Legion.Database legionDB;
         public Unit.Database unitDB;
         public PlayerData playerData;
-        public Dictionary<int, Unit.Property> unitModels = new Dictionary<int, Unit.Property> ();
+        public Dictionary<int, Unit.Model> unit = new Dictionary<int, Unit.Model> ();
+        [Header("Play Mode")]
         public Dictionary<int, Legion.BattleModel> legions = new Dictionary<int, Legion.BattleModel> ();
-        public List<Unit.BattleModel> units = new List<Unit.BattleModel> ();
+        public List<Unit.BattleModel> listReserveUnit = new List<Unit.BattleModel> ();
 
-        public void MasterModelCollector ()
+        public void InitializeUnitProperty ()
         {
-            unitModels.Clear ();
+            unit.Clear ();
             int count = unitDB.data.Count;
             for (int i = 0; i < count; i++)
             {
-                Unit.Property model = new Unit.Property (unitDB.valueList[i]);
-                unitModels.Add ((int) unitDB.keyList[i], model);
+                Unit.Model model = new Unit.Model (unitDB.valueList[i]);
+                unit.Add ((int) unitDB.keyList[i], model);
             }
-            Debug.Log ("<color=yellow>" + unitModels.Count + " MasterModel</color> has been <color=lime>Updated</color>.");
+            Debug.Log ("<color=yellow>" + unit.Count + " units</color> has been <color=lime>Updated</color>.");
         }
         public void SynchronizeLegionsToPlayerData ()
         {
             playerData.legions.Clear ();
-            Dictionary<int, Legion.Model> legions = legionDB.data;
+            Dictionary<int, Legion.Info> legions = legionDB.data;
             List<int> keys = legions.Keys.ToList ();
             int dataCount = keys.Count;
             for (int index = 0; index < dataCount; index++)
@@ -58,7 +59,7 @@ namespace Warfare
         }
         public void SynchronizeLegionToPlayerData (int index)
         {
-            Dictionary<int, Legion.Model> legions = legionDB.data;
+            Dictionary<int, Legion.Info> legions = legionDB.data;
             int id = index;
             Legion.Data legion = new Legion.Data (id);
             if (playerData.legions.ContainsKey (id))
@@ -81,7 +82,7 @@ namespace Warfare
         }
         public void SynchronizeLegionSquadronToPlayerData (int index, int order)
         {
-            Dictionary<int, Legion.Model> legions = legionDB.data;
+            Dictionary<int, Legion.Info> legions = legionDB.data;
             int id = index;
             Legion.Data legion;
             if (playerData.legions.ContainsKey (id))
@@ -105,13 +106,13 @@ namespace Warfare
         public void SynchronizeUnitsToPlayerData ()
         {
             playerData.units.Clear ();
-            Dictionary<int, Legion.Model> legions = legionDB.data;
+            Dictionary<int, Legion.Info> legions = legionDB.data;
             List<int> keys = legions.Keys.ToList ();
             int dataCount = keys.Count;
             for (int index = 0; index < dataCount; index++)
             {
                 int id = keys[index];
-                if (id < 9900) continue;
+                if (id < 9900) continue; // 預備單位已經設定在 編號9900以上的軍團
 
                 for (int order = 0; order < legions[id].m_squadron.Length; order++)
                 {
@@ -169,8 +170,8 @@ namespace Warfare
                 {
                     if (data.ContainsKey (order))
                     {
-                        Unit.BattleModel unit = new Unit.BattleModel (order, unitModels[data[order].Type], data[order]);
-                        squadron.Add (order, unit);
+                        Unit.BattleModel model = new Unit.BattleModel (order, unit[data[order].Type], data[order]);
+                        squadron.Add (order, model);
                     }
                 }
                 legions.Add (keys[index], new Legion.BattleModel (squadron));
@@ -196,22 +197,22 @@ namespace Warfare
         }
         public bool ConverseUnitsBattleModel ()
         {
-            units.Clear ();
+            listReserveUnit.Clear ();
             List<Unit.Data> data = playerData.units;
             int count = data.Count;
             for (int index = 0; index < count; index++)
             {
-                units.Add (new Unit.BattleModel (-1, unitModels[data[index].Type], data[index]));
+                listReserveUnit.Add (new Unit.BattleModel (-1, unit[data[index].Type], data[index]));
             }
             return true;
         }
         public bool ConverseUnitsData ()
         {
             playerData.units.Clear ();
-            int count = units.Count;
+            int count = listReserveUnit.Count;
             for (int index = 0; index < count; index++)
             {
-                playerData.units.Add (units[index].data);
+                playerData.units.Add (listReserveUnit[index].data);
             }
             return true;
         }
