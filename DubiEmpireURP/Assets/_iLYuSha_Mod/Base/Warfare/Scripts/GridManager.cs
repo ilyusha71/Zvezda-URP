@@ -69,30 +69,30 @@ namespace Warfare
         {
             if (state == GridState.Disable) return;
             if (unit == null) return;
-            if (unit.data.HP == 0)
+            if (unit.Data.HP == 0)
                 Debug.LogError("QQ");
             audioSource.PlayOneShot(clipHover);
             gridSprite.color = enterColor;
-            avatar.sprite = unit.model.Sprite;
-            textType.text = Naming.Type(unit.data.Type);
-            textFire.text = unit.model.FireRate.ToString();
-            textRange.text = Naming.Range(unit.model.Range);
-            textHP.text = unit.data.HP.ToString();
+            avatar.sprite = unit.Model.Sprite;
+            textType.text = Naming.Type(unit.Data.Type);
+            textFire.text = unit.Model.FireRate.ToString();
+            textRange.text = Naming.Range(unit.Model.Range);
+            textHP.text = unit.Data.HP.ToString();
             textCount.text = unit.UnitCount().ToString();
-            textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();
-            textMech.text = (unit.UnitCount() * unit.model.ATK[1]).ToString();
-            textAir.text = (unit.UnitCount() * unit.model.ATK[2]).ToString();
+            textDubi.text = (unit.UnitCount() * unit.Model.ATK[0]).ToString();
+            textMech.text = (unit.UnitCount() * unit.Model.ATK[1]).ToString();
+            textAir.text = (unit.UnitCount() * unit.Model.ATK[2]).ToString();
         }
         void OnMouseOver()
         {
             if (unit == null) return;
-            if (unit.data.HP == 0)
+            if (unit.Data.HP == 0)
                 Debug.LogError("QQ");
-            textHP.text = unit.data.HP.ToString();
+            textHP.text = unit.Data.HP.ToString();
             textCount.text = unit.UnitCount().ToString();
-            textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();
-            textMech.text = (unit.UnitCount() * unit.model.ATK[1]).ToString();
-            textAir.text = (unit.UnitCount() * unit.model.ATK[2]).ToString();
+            textDubi.text = (unit.UnitCount() * unit.Model.ATK[0]).ToString();
+            textMech.text = (unit.UnitCount() * unit.Model.ATK[1]).ToString();
+            textAir.text = (unit.UnitCount() * unit.Model.ATK[2]).ToString();
         }
         void OnMouseExit()
         {
@@ -167,20 +167,20 @@ namespace Warfare
             }
             this.unit = unit;
             unit.order = Order;
-            int[] array = new int[unit.model.UnitCount(unit.data.HP)]; // 目前數量
-            int[] array2 = new int[unit.model.Formation.Length]; // 最大數量
+            int[] array = new int[unit.Model.UnitCount(unit.Data.HP)]; // 目前數量
+            int[] array2 = new int[unit.Model.Formation.Length]; // 最大數量
             for (int i = 0; i < array2.Length; i++)
             {
                 array2[i] = 1; // 取得權重，各位置權重相同
             }
             for (int j = 0; j < array.Length; j++)
             {
-                int lotteryIndex = unit.model.Field == Unit.Field.Dubi ? GetLotteryIndex(array2) : j; // 只有Dubi要抽位置
+                int lotteryIndex = unit.Model.Field == Unit.Field.Dubi ? GetLotteryIndex(array2) : j; // 只有Dubi要抽位置
 
                 if (state == GridState.Foe)
-                    stacks.Add(lotteryIndex, Instantiate(unit.model.Instance, transform.position + unit.model.Formation[unit.model.Formation.Length - 1 - lotteryIndex] * 1, Quaternion.Euler(0, 180, 0)));
+                    stacks.Add(lotteryIndex, Instantiate(unit.Model.Instance, transform.position + unit.Model.Formation[unit.Model.Formation.Length - 1 - lotteryIndex] * 1, Quaternion.Euler(0, 180, 0)));
                 else
-                    stacks.Add(lotteryIndex, Instantiate(unit.model.Instance, transform.position + unit.model.Formation[lotteryIndex] * 1, Quaternion.identity));
+                    stacks.Add(lotteryIndex, Instantiate(unit.Model.Instance, transform.position + unit.Model.Formation[lotteryIndex] * 1, Quaternion.identity));
                 array2[lotteryIndex] = 0; // 抽中後將權重改為0
             }
             if (state != GridState.Deploy)

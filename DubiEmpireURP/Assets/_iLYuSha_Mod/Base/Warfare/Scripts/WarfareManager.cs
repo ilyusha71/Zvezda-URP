@@ -15,14 +15,17 @@ namespace Warfare
         [Header("Model")]
         public Dictionary<int, Unit.Model> unit = new Dictionary<int, Unit.Model>();
         public Dictionary<int, Legion.Model> legion = new Dictionary<int, Legion.Model>();
+
+
+        public Dictionary<int, Unit.DataModel> unitDM = new Dictionary<int, Unit.DataModel>();
         [Header("Play Mode")]
         public Dictionary<int, Legion.BattleModel> legions = new Dictionary<int, Legion.BattleModel>();
         public List<Unit.BattleModel> reserveUnits = new List<Unit.BattleModel>();
 
-        public List<Unit.DataModel> reserve = new List<Unit.DataModel>(); // Legion.Manager
+        // public List<Unit.DataModel> reserve = new List<Unit.DataModel>(); // Legion.Manager
 
-        // 初始化數據庫的作戰單位與軍團的模板
-        public void InitializeModel()
+        // 根據數據庫創建作戰單位與軍團的模板
+        public void CreateModel()
         {
             unit.Clear();
             int count = unitDB.data.Count;
@@ -31,7 +34,7 @@ namespace Warfare
                 Unit.Model model = new Unit.Model(unitDB.valueList[i]);
                 unit.Add((int)unitDB.keyList[i], model);
             }
-            Debug.Log("<color=yellow>" + unit.Count + " units</color> has been <color=lime>Updated</color>.");
+            Debug.Log("<color=yellow>" + unit.Count + " units</color> has been <color=lime>created</color>.");
 
             legion.Clear();
             count = legionDB.data.Count;
@@ -42,37 +45,56 @@ namespace Warfare
                 legion.Add((int)legionDB.keyList[i], model);
             }
         }
-        public void InitializeReverseUnitFromDB()
+        public void InitializeLegionModelFromDB(Legion.Faction faction, Legion.Type type)
+        {
+            Legion.Model legionModel = legion[(int)faction * 1000 + (int)type];
+            // Get squadron data
+            int count = legionModel.Squadron.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Unit.BattleModel unitBattleModel =
+                 new Unit.BattleModel(i, unit[legionModel.Squadron[i].Type], legionModel.Squadron[i]);
+            }
+            // legionModel.Squadron
+
+
+            // Legion.BattleModel battle = new Legion.BattleModel()
+
+        }
+        // 生成預備作戰單位資料
+        public void GenerateReverseUnitFromDB()
         {
             playerData.reserve.Clear();
-            reserve.Clear();
-            List<int> keys = legion.Keys.ToList();
-            int countKey = keys.Count;
-            for (int i = 0; i < countKey; i++)
+            reserveUnits.Clear();
+            List<int> legionKey = legion.Keys.ToList();
+            int legionCount = legionKey.Count;
+            for (int i = 0; i < legionCount; i++)
             {
-                int index = keys[i];
+                int index = legionKey[i];
                 if (index < 99000) continue; // 預備單位已經設定在 編號9900以上的軍團
-                int countSquadron = legion[index].Squadron.Count;
-                for (int order = 0; order < countSquadron; order++)
+
+                List<int> squadronKey = legion[index].Squadron.Keys.ToList();
+                int squadronCount = squadronKey.Count;
+                for (int j = 0; j < squadronCount; j++)
                 {
+                    int order = squadronKey[j];
                     int type = (int)legion[index].Squadron[order].Type;
-                    if (type == 0) // Empty
-                        continue;
-                    playerData.reserve.Add(legion[index].Squadron[order]);
-                    Unit.DataModel dataModel = new Unit.DataModel(unit[type], legion[index].Squadron[order]);
-                    reserve.Add(dataModel);
+                    Unit.Data data = legion[index].Squadron[order];
+                    playerData.reserve.Add(data);
+                    Unit.BattleModel dataModel = new Unit.BattleModel(-1, unit[type], data);
+                    reserveUnits.Add(dataModel);
                 }
             }
         }
         public void InitializeReverseUnitFromPlayer()
         {
-            reserve.Clear();
+            reserveUnits.Clear();
             int count = playerData.reserve.Count;
             for (int order = 0; order < count; order++)
             {
                 int type = playerData.reserve[order].Type;
-                Unit.DataModel dataModel = new Unit.DataModel(unit[type], playerData.reserve[order]);
-                reserve.Add(dataModel);
+                Unit.BattleModel dataModel = new Unit.BattleModel(-1, unit[type], playerData.reserve[order]);
+                reserveUnits.Add(dataModel);
             }
         }
         public void SynchronizeLegionsToPlayerData()
@@ -237,7 +259,7 @@ namespace Warfare
                 for (int order = 0; order < 13; order++)
                 {
                     if (data.ContainsKey(order))
-                        legion.squadron.Add(order, legions[keys[index]].squadron[order].data);
+                        legion.squadron.Add(order, legions[keys[index]].squadron[order].Data);
                 }
                 playerData.legions.Add(keys[index], legion);
             }
@@ -260,7 +282,7 @@ namespace Warfare
             int count = reserveUnits.Count;
             for (int index = 0; index < count; index++)
             {
-                playerData.reserve.Add(reserveUnits[index].data);
+                playerData.reserve.Add(reserveUnits[index].Data);
             }
             return true;
         }

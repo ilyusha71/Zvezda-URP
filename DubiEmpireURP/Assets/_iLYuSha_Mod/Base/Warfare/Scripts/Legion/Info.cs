@@ -9,17 +9,19 @@ namespace Warfare.Legion
     [CreateAssetMenu(fileName = "Data", menuName = "Warfare/Legion/Create Data")]
     public class Info : ScriptableObject
     {
-        public int m_index; // Warning! This is legion model number (5 digits), not legion number (4 digits) in game.
         public int m_legion;
 
         public Faction m_faction;
         public Type m_type;
         public Squadron[] m_squadron = new Squadron[13];
+        // public int m_index; // Warning! This is legion model number (5 digits), not legion number (4 digits) in game.
+        public int LegionModelNumber { get; private set; }
+
 
 #if UNITY_EDITOR
         public void JoinDatabase()
         {
-            m_index = (int)m_faction * 1000 + (int)m_type;
+            LegionModelNumber = (int)m_faction * 1000 + (int)m_type;
             for (int i = 0; i < m_squadron.Length; i++)
             {
                 m_squadron[i].Rebuild();
@@ -82,7 +84,7 @@ namespace Warfare.Legion
         {
             this.squadron = t;
         }
-        public void Rearrange(int wave)
+        public void UpdateRangeList(int wave)
         {
             // Range list for enermy fire
             // 0 = short range

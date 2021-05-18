@@ -45,7 +45,7 @@ namespace Warfare
         void Awake()
         {
             windowTips.SetActive(false);
-            warfare.InitializeModel();
+            warfare.CreateModel();
             warfare.SynchronizeLegionsToPlayerData();
             warfare.SynchronizeUnitsToPlayerData();
             warfare.ConverseLegionBattleModel();
@@ -81,7 +81,7 @@ namespace Warfare
                     else
                         grids[index].Disable(order);
                 }
-                battle.legions[side].Rearrange(battle.wave);
+                battle.legions[side].UpdateRangeList(battle.wave);
             }
             textWave.text = "第" + (++battle.wave) + "波";
             textAction.text = (battle.action = 0).ToString();
@@ -137,7 +137,7 @@ namespace Warfare
                             else if (grid.Order > 8)
                                 targetList = battle.legions[1].rangeList[4];
                             else
-                                targetList = battle.legions[1].rangeList[(int)grid.unit.model.Range];
+                                targetList = battle.legions[1].rangeList[(int)grid.unit.Model.Range];
 
                             int count = targetList.Count;
                             for (int i = 0; i < count; i++)

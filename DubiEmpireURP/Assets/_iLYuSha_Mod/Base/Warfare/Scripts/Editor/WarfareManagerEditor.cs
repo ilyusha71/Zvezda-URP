@@ -14,7 +14,7 @@ namespace Warfare
             {
                 foreach (var script in scripts)
                 {
-                    script.InitializeModel();
+                    script.CreateModel();
                     EditorUtility.SetDirty(script);
                     AssetDatabase.SaveAssets();
                 }

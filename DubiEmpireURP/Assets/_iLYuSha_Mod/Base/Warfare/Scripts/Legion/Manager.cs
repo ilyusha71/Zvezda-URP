@@ -28,11 +28,12 @@ namespace Warfare.Legion
             rectTransform = reserveGroup.GetComponent<RectTransform>();
             scrollbar = reserveGroup.parent.GetComponentInChildren<Scrollbar>();
             // Debug.LogWarning(warfare.unit.Count);
-            warfare.InitializeModel();
+            warfare.CreateModel();
+            warfare.GenerateReverseUnitFromDB();
             warfare.SynchronizeLegionsToPlayerData();
-            warfare.SynchronizeUnitsToPlayerData();
+            // warfare.SynchronizeUnitsToPlayerData();
             warfare.ConverseLegionBattleModel();
-            warfare.ConverseUnitsBattleModel();
+            // warfare.ConverseUnitsBattleModel();
         }
 
         public void Start()
@@ -160,10 +161,10 @@ namespace Warfare.Legion
         public void RegisterReserveUnit(Unit.BattleModel unit)
         {
             Toggle btn = Instantiate(prefabUnitButton, reserveGroup).GetComponent<Toggle>();
-            btn.gameObject.name = unit.model.Type.ToString();
+            btn.gameObject.name = unit.Model.Type.ToString();
             btn.group = btn.GetComponentInParent<ToggleGroup>();
-            btn.GetComponent<Image>().sprite = unit.model.Sprite;
-            btn.GetComponentsInChildren<TextMeshProUGUI>()[0].text = unit.model.Field == Unit.Field.Dubi ? "x " + unit.UnitCount().ToString() : unit.data.HP.ToString();
+            btn.GetComponent<Image>().sprite = unit.Model.Sprite;
+            btn.GetComponentsInChildren<TextMeshProUGUI>()[0].text = unit.Model.Field == Unit.Field.Dubi ? "x " + unit.UnitCount().ToString() : unit.Data.HP.ToString();
             listReserveUnits.Add(btn);
             btn.onValueChanged.AddListener(isOn =>
            {
@@ -172,15 +173,15 @@ namespace Warfare.Legion
                    unitSelected = unit;
                    btnSelected = btn;
 
-                   grids[0].avatar.sprite = unit.model.Sprite;
-                   grids[0].textType.text = Naming.Type(unit.data.Type);
-                   grids[0].textFire.text = unit.model.FireRate.ToString();
-                   grids[0].textRange.text = Naming.Range(unit.model.Range);
-                   grids[0].textHP.text = unit.data.HP.ToString();
+                   grids[0].avatar.sprite = unit.Model.Sprite;
+                   grids[0].textType.text = Naming.Type(unit.Data.Type);
+                   grids[0].textFire.text = unit.Model.FireRate.ToString();
+                   grids[0].textRange.text = Naming.Range(unit.Model.Range);
+                   grids[0].textHP.text = unit.Data.HP.ToString();
                    grids[0].textCount.text = unit.UnitCount().ToString();
-                   grids[0].textDubi.text = (unit.UnitCount() * unit.model.ATK[0]).ToString();
-                   grids[0].textMech.text = (unit.UnitCount() * unit.model.ATK[1]).ToString();
-                   grids[0].textAir.text = (unit.UnitCount() * unit.model.ATK[2]).ToString();
+                   grids[0].textDubi.text = (unit.UnitCount() * unit.Model.ATK[0]).ToString();
+                   grids[0].textMech.text = (unit.UnitCount() * unit.Model.ATK[1]).ToString();
+                   grids[0].textAir.text = (unit.UnitCount() * unit.Model.ATK[2]).ToString();
                }
            });
             btn.transform.localScale = Vector3.one;

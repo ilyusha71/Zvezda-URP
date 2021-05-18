@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccbba39eaad241747b645ed3ecbb89ce, type: 3}
   m_Name: '[3]Experimental Legion 4'
   m_EditorClassIdentifier: 
-  m_index: 3
   m_legion: 3
   m_faction: 0
   m_type: 3
@@ -21,64 +20,64 @@ MonoBehaviour:
     type: 2112
     info: {fileID: 11400000, guid: f83bba60a41eec7438dc2921f7787cd4, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: 4b4f9d8c7e981ad43a81d887062bdfb0, type: 3}
     type: 1142
     info: {fileID: 11400000, guid: 854046e85cb497c4fa51144c3c5a8599, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: 51428305673cb7141905b763d2b9bc88, type: 3}
     type: 2062
     info: {fileID: 11400000, guid: 83d2021ee4b53f141b2870df9143b58a, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: b6ba67fb59519b8468de0c66d5613f81, type: 3}
     type: 2002
     info: {fileID: 11400000, guid: 962a1486c1605f740bd88dec6fee831d, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: 305810749d6819446a3d4e8a4d5c14fc, type: 3}
     type: 2022
     info: {fileID: 11400000, guid: 711252d746ad0d746919f7223d2998f4, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: 5401312380d2ffe4aa125485e6cd5083, type: 3}
     type: 2061
     info: {fileID: 11400000, guid: e948c72174a15424593ba8ee44bc7530, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: 7966314454db6124e88e91a03b791530, type: 3}
     type: 1062
     info: {fileID: 11400000, guid: a236f6265dea7dc4a8de2820cfcc2149, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: 51428305673cb7141905b763d2b9bc88, type: 3}
     type: 2062
     info: {fileID: 11400000, guid: 83d2021ee4b53f141b2870df9143b58a, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 2800000, guid: 6ddb35c0ade95cb44a3139c15dee7e6a, type: 3}
     type: 2141
     info: {fileID: 11400000, guid: 4049cb8737ae1fc429e1eaa06faca1a4, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1

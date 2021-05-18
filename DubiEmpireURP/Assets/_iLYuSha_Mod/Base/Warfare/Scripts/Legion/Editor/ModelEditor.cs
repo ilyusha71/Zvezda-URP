@@ -17,19 +17,19 @@ namespace Warfare.Legion
                 {
                     script.JoinDatabase();
                     Database database = AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Legion/Database.asset");
-                    string assetName = "[" + script.m_index.ToString() + "]" + script.m_faction.ToString() + " Legion " + (script.m_legion + 1);
-                    if (!database.data.ContainsKey(script.m_index))
+                    string assetName = "[" + script.LegionModelNumber.ToString() + "]" + script.m_faction.ToString() + " Legion " + (script.m_legion + 1);
+                    if (!database.data.ContainsKey(script.LegionModelNumber))
                     {
-                        database.data.Add(script.m_index, script);
-                        Debug.Log("<color=yellow>" + script.m_index.ToString() + "</color> has been <color=lime>Joined</color>.");
+                        database.data.Add(script.LegionModelNumber, script);
+                        Debug.Log("<color=yellow>" + script.LegionModelNumber.ToString() + "</color> has been <color=lime>Joined</color>.");
                         AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(script), assetName);
                     }
                     else
                     {
-                        if (database.data[script.m_index].name != assetName)
+                        if (database.data[script.LegionModelNumber].name != assetName)
                         {
-                            database.data[script.m_index] = script;
-                            Debug.Log("<color=yellow>" + script.m_index.ToString() + "</color> has been <color=cyan>Updated</color>.");
+                            database.data[script.LegionModelNumber] = script;
+                            Debug.Log("<color=yellow>" + script.LegionModelNumber.ToString() + "</color> has been <color=cyan>Updated</color>.");
                             AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(script), assetName);
                         }
                     }

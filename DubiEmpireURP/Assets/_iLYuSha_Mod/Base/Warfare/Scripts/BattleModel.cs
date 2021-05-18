@@ -39,7 +39,7 @@
         {
             for (int side = 0; side < 2; side++)
             {
-                legions[side].Rearrange (wave);
+                legions[side].UpdateRangeList (wave);
             }
             action++;
         }
@@ -70,7 +70,7 @@
                             if (!quickBattle)
                                 grids[side * 17 + order].Hit ();
                             unit.Clear ();
-                            if (unit.data.HP == 0)
+                            if (unit.Data.HP == 0)
                             {
                                 legions[side].squadron.Remove (order);
                                 if (!quickBattle)

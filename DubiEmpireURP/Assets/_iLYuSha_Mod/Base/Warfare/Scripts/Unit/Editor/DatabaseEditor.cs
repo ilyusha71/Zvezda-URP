@@ -59,7 +59,7 @@ namespace Warfare.Unit
                     database.Sort();
                 GUI.backgroundColor = Color.green;
                 if (GUILayout.Button("Update", GUILayout.Height(25), GUILayout.Width(66)))
-                    warfare.InitializeModel();
+                    warfare.CreateModel();
                 GUI.backgroundColor = Color.white;
                 warfare = EditorGUILayout.ObjectField(warfare, typeof(WarfareManager), true, GUILayout.Height(25), GUILayout.Width(300)) as WarfareManager;
                 if (EditorGUI.EndChangeCheck())

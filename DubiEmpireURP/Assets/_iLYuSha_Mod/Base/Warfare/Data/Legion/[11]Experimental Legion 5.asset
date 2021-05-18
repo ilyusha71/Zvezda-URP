@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccbba39eaad241747b645ed3ecbb89ce, type: 3}
   m_Name: '[11]Experimental Legion 5'
   m_EditorClassIdentifier: 
-  m_index: 11
   m_legion: 4
   m_faction: 0
   m_type: 11
@@ -21,64 +20,64 @@ MonoBehaviour:
     type: 1151
     info: {fileID: 11400000, guid: 9644d105be40fc44fb94a67534c546ff, type: 2}
     m_percent: 1
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
-    level: 0
+    level: 1
