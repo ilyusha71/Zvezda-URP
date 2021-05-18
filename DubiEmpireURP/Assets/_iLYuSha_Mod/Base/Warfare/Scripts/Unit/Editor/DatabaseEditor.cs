@@ -17,7 +17,7 @@ namespace Warfare.Unit
         public static void ShowDatabaseWindow()
         {
             var window = EditorWindow.GetWindow<DatabaseEditor>(false, "Unit Database", true);
-            window.warfare = UnityEditor.AssetDatabase.LoadAssetAtPath<WarfareManager>("Assets/_iLYuSha_Mod/Base/Warfare/Warfare Manager.asset");
+            window.warfare = UnityEditor.AssetDatabase.LoadAssetAtPath<WarfareManager>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Warfare Manager.asset");
             window.database = UnityEditor.AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset");
             window.editor = Editor.CreateEditor(window.database);
         }
@@ -27,7 +27,6 @@ namespace Warfare.Unit
                 ShowDatabaseWindow();
             EditorGUILayout.BeginVertical(GUILayout.MinHeight(position.height));
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-            // this.editor.OnInspectorGUI();
             DrawDatabaseInspector();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
@@ -60,7 +59,7 @@ namespace Warfare.Unit
                     database.Sort();
                 GUI.backgroundColor = Color.green;
                 if (GUILayout.Button("Update", GUILayout.Height(25), GUILayout.Width(66)))
-                    warfare.InitializeUnitProperty();
+                    warfare.InitializeModel();
                 GUI.backgroundColor = Color.white;
                 warfare = EditorGUILayout.ObjectField(warfare, typeof(WarfareManager), true, GUILayout.Height(25), GUILayout.Width(300)) as WarfareManager;
                 if (EditorGUI.EndChangeCheck())

@@ -9,19 +9,20 @@ namespace Warfare.Legion
     [CreateAssetMenu(fileName = "Data", menuName = "Warfare/Legion/Create Data")]
     public class Info : ScriptableObject
     {
-        public int m_index;
+        public int m_index; // Warning! This is legion model number (5 digits), not legion number (4 digits) in game.
+        public int m_legion;
+
         public Faction m_faction;
         public Type m_type;
-        public int m_legion;
-        public SquadronInspector[] m_squadron = new SquadronInspector[13];
+        public Squadron[] m_squadron = new Squadron[13];
 
 #if UNITY_EDITOR
-        public void SetIndex()
+        public void JoinDatabase()
         {
-            m_index = (int)m_faction * 100 + m_legion;
+            m_index = (int)m_faction * 1000 + (int)m_type;
             for (int i = 0; i < m_squadron.Length; i++)
             {
-                m_squadron[i].SetUnit();
+                m_squadron[i].Rebuild();
             }
         }
 #endif
@@ -41,7 +42,7 @@ namespace Warfare.Legion
                 Unit.Data unit = new Unit.Data();
                 unit.Type = type;
                 unit.HP = info.m_squadron[order].HP;
-                // 還需要補齊 Level Exp
+                unit.Level = info.m_squadron[order].Level;
                 Squadron.Add(order, unit);
             }
         }
@@ -49,13 +50,15 @@ namespace Warfare.Legion
         public Type Type { get; private set; }
         public Dictionary<int, Unit.Data> Squadron = new Dictionary<int, Unit.Data>();
     }
-
     [System.Serializable]
     public class Data
     {
-        public int Id { get; private set; }
+        public int Faction { get; private set; }
+        public int Type { get; private set; }
         public Dictionary<int, Unit.Data> squadron = new Dictionary<int, Unit.Data>();
 
+
+        public int Id { get; private set; }
         public Data(int id)
         {
             Id = id;
@@ -70,6 +73,8 @@ namespace Warfare.Legion
             squadron = t;
         }
     }
+    public class ManageModel : DataModel<Unit.DataModel> { }
+
     public class BattleModel : DataModel<Unit.BattleModel>
     {
         public List<Unit.BattleModel>[] rangeList = new List<Unit.BattleModel>[5];
@@ -126,86 +131,61 @@ namespace Warfare.Legion
             }
         }
     }
-    // [System.Serializable]
-    // public class Squadron
-    // {
-    //     public Unit.Property model;
-    //     public int hp, level, exp;
-
-    //     public int UnitCount
-    //     {
-    //         get { return Mathf.CeilToInt((float)hp / model.HP); }
-    //     }
-    //     public int TotalDamage(Unit.Field field)
-    //     {
-    //         return UnitCount * model.ATK[(int)field];
-    //     }
-    // }
-
-
 
     [System.Serializable]
-    public class SquadronInspector
+    public class Squadron
     {
         public Texture m_texture;
         public Unit.Type type;
         public Unit.Info info;
-        public Unit.Model model;
         [Range(0f, 1f)]
         public float m_percent = 1.0f;
+        public int Stack
+        {
+            get { return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(info.m_formation.Length * m_percent)); }
+            set { m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / info.m_formation.Length); }
+        }
+        public int HP
+        {
+            get { return Stack * info.m_hp; }
+        }
+        [Range(1, 100)]
+        public int level;
+        public int Level
+        {
+            get { return level; }
+            set { level = Mathf.Clamp(value, 1, 100); }
+        }
 
 #if UNITY_EDITOR
-        public void SetUnit()
+        public void Rebuild()
         {
             if (m_texture)
             {
                 type = (Unit.Type)int.Parse(m_texture.name.Split(new char[2] { '[', ']' })[1]);
                 info = AssetDatabase.LoadAssetAtPath<Unit.Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Unit/Database.asset").data[type];
-                model = new Unit.Model(info);
             }
             else
             {
                 type = Unit.Type.None;
-                // info = null;
-                model = null;
+                info = null;
             }
-            // Debug.Log("sd");
-            // if (data != null) // 臨時修改
-            //     info = data;
         }
 #endif
-        public int Stack
-        {
-            get
-            {
-                // return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(info.m_formation.Length * m_percent));
-                return type == 0 ? 1 : Mathf.Max(1, Mathf.CeilToInt(model.Formation.Length * m_percent));
-
-            }
-            set
-            {
-                // m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / info.m_formation.Length);
-                m_percent = type == 0 ? 0 : Mathf.Clamp01((float)value / model.Formation.Length);
-
-            }
-        }
-        public int HP
-        {
-            get
-            {
-                return Stack * model.HP;
-            }
-        }
     }
     public enum Faction
     {
         Experimental = 0,
-        Wakaka = 10,
+        Anfail = 10,
         NO1 = 11,
         NO2 = 12,
         NO3 = 13,
         NO4 = 14,
         NO5 = 15,
+        KingdomA = 41,
+        KingdomB = 42,
+        KingdomC = 43,
+        KingdomD = 44,
         Reserve = 99,
     }
     public enum Type

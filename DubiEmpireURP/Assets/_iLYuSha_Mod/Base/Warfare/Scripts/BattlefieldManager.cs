@@ -45,7 +45,7 @@ namespace Warfare
         void Awake()
         {
             windowTips.SetActive(false);
-            warfare.InitializeUnitProperty();
+            warfare.InitializeModel();
             warfare.SynchronizeLegionsToPlayerData();
             warfare.SynchronizeUnitsToPlayerData();
             warfare.ConverseLegionBattleModel();

@@ -25,7 +25,6 @@ namespace Warfare.Legion
                 ShowDatabaseWindow();
             EditorGUILayout.BeginVertical(GUILayout.MinHeight(position.height));
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-            // this.editor.OnInspectorGUI();
             DrawDatabaseInspector();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
@@ -82,21 +81,7 @@ namespace Warfare.Legion
                     GUI.skin.label.fontSize = 16;
                     GUI.skin.label.fontStyle = FontStyle.Bold;
                     GUI.contentColor = Color.green;
-                    switch (legion.Key % 10)
-                    {
-                        case 0:
-                            GUILayout.Label((legion.Value.m_legion + 1).ToString() + "st Legion", GUILayout.Width(90));
-                            break;
-                        case 1:
-                            GUILayout.Label((legion.Value.m_legion + 1).ToString() + "nd Legion", GUILayout.Width(90));
-                            break;
-                        case 2:
-                            GUILayout.Label((legion.Value.m_legion + 1).ToString() + "rd Legion", GUILayout.Width(90));
-                            break;
-                        default:
-                            GUILayout.Label((legion.Value.m_legion + 1).ToString() + "th Legion", GUILayout.Width(90));
-                            break;
-                    }
+                    GUILayout.Label(legion.Value.m_faction.ToString() + " " + legion.Value.m_type.ToString() + " Legion", GUILayout.Width(500));
                     GUI.contentColor = Color.white;
                 }
                 GUILayout.EndHorizontal();
@@ -127,9 +112,12 @@ namespace Warfare.Legion
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                legion.Value.m_squadron[0].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[0].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[1].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[1].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[2].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[2].Stack, GUILayout.Width(100));
+                for (int order = 0; order < 3; order++)
+                {
+                    EditorGUILayout.LabelField("Lv.", GUILayout.Width(18));
+                    legion.Value.m_squadron[order].Level = EditorGUILayout.IntField(legion.Value.m_squadron[order].Level, GUILayout.Width(30));
+                    legion.Value.m_squadron[order].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[order].Stack, GUILayout.Width(46));
+                }
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.Space(15);
@@ -148,15 +136,26 @@ namespace Warfare.Legion
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                legion.Value.m_squadron[9].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[9].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[10].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[10].Stack, GUILayout.Width(100));
+                for (int order = 9; order <= 10; order++)
+                {
+                    EditorGUILayout.LabelField("Lv.", GUILayout.Width(18));
+                    legion.Value.m_squadron[order].Level = EditorGUILayout.IntField(legion.Value.m_squadron[order].Level, GUILayout.Width(30));
+                    legion.Value.m_squadron[order].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[order].Stack, GUILayout.Width(46));
+                }
                 GUILayout.Space(30);
-                legion.Value.m_squadron[3].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[3].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[4].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[4].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[5].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[5].Stack, GUILayout.Width(100));
+                for (int order = 3; order <= 5; order++)
+                {
+                    EditorGUILayout.LabelField("Lv.", GUILayout.Width(18));
+                    legion.Value.m_squadron[order].Level = EditorGUILayout.IntField(legion.Value.m_squadron[order].Level, GUILayout.Width(30));
+                    legion.Value.m_squadron[order].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[order].Stack, GUILayout.Width(46));
+                }
                 GUILayout.Space(30);
-                legion.Value.m_squadron[11].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[11].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[12].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[12].Stack, GUILayout.Width(100));
+                for (int order = 11; order <= 12; order++)
+                {
+                    EditorGUILayout.LabelField("Lv.", GUILayout.Width(18));
+                    legion.Value.m_squadron[order].Level = EditorGUILayout.IntField(legion.Value.m_squadron[order].Level, GUILayout.Width(30));
+                    legion.Value.m_squadron[order].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[order].Stack, GUILayout.Width(46));
+                }
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.Space(15);
@@ -169,20 +168,19 @@ namespace Warfare.Legion
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                legion.Value.m_squadron[6].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[6].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[7].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[7].Stack, GUILayout.Width(100));
-                legion.Value.m_squadron[8].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[8].Stack, GUILayout.Width(100));
+                for (int order = 6; order <= 8; order++)
+                {
+                    EditorGUILayout.LabelField("Lv.", GUILayout.Width(18));
+                    legion.Value.m_squadron[order].Level = EditorGUILayout.IntField(legion.Value.m_squadron[order].Level, GUILayout.Width(30));
+                    legion.Value.m_squadron[order].Stack = EditorGUILayout.IntField("x", legion.Value.m_squadron[order].Stack, GUILayout.Width(46));
+                }
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 if (EditorGUI.EndChangeCheck())
                 {
                     for (int i = 0; i < 13; i++)
                     {
-                        legion.Value.m_squadron[i].SetUnit();
-                        // if (legion.Value.m_squadron[i].m_texture)
-
-                        // else
-                        //     legion.Value.m_squadron[i].type = Unit.Type.None;
+                        legion.Value.m_squadron[i].Rebuild();
                     }
                     EditorUtility.SetDirty(legion.Value);
                     EditorUtility.SetDirty(database);

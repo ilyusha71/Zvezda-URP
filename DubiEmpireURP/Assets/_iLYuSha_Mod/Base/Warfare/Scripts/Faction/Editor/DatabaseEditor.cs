@@ -16,7 +16,7 @@ namespace Warfare.Faction
         public static void ShowDatabaseWindow()
         {
             var window = EditorWindow.GetWindow<DatabaseEditor>(false, "Faction Database", true);
-            window.warfare = UnityEditor.AssetDatabase.LoadAssetAtPath<WarfareManager>("Assets/_iLYuSha_Mod/Base/Warfare/Warfare Manager.asset");
+            window.warfare = UnityEditor.AssetDatabase.LoadAssetAtPath<WarfareManager>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Warfare Manager.asset");
             window.database = UnityEditor.AssetDatabase.LoadAssetAtPath<Database>("Assets/_iLYuSha_Mod/Base/Warfare/Data/Faction/Database.asset");
             window.editor = Editor.CreateEditor(window.database);
         }

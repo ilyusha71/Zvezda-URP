@@ -6,218 +6,265 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 namespace Warfare
 {
-    [CreateAssetMenu (fileName = "Warfare Manager", menuName = "Warfare/Create Warfare Manager")]
+    [CreateAssetMenu(fileName = "Warfare Manager", menuName = "Warfare/Create Warfare Manager")]
     public class WarfareManager : ScriptableObject
     {
         public Legion.Database legionDB;
         public Unit.Database unitDB;
         public PlayerData playerData;
-         [Header("Model")]
-        public Dictionary<int, Unit.Model> unit = new Dictionary<int, Unit.Model> ();
+        [Header("Model")]
+        public Dictionary<int, Unit.Model> unit = new Dictionary<int, Unit.Model>();
+        public Dictionary<int, Legion.Model> legion = new Dictionary<int, Legion.Model>();
         [Header("Play Mode")]
-        public Dictionary<int, Legion.BattleModel> legions = new Dictionary<int, Legion.BattleModel> ();
-        public List<Unit.BattleModel> listReserveUnit = new List<Unit.BattleModel> ();
+        public Dictionary<int, Legion.BattleModel> legions = new Dictionary<int, Legion.BattleModel>();
+        public List<Unit.BattleModel> reserveUnits = new List<Unit.BattleModel>();
 
-        public void InitializeUnitProperty ()
+        public List<Unit.DataModel> reserve = new List<Unit.DataModel>(); // Legion.Manager
+
+        // 初始化數據庫的作戰單位與軍團的模板
+        public void InitializeModel()
         {
-            unit.Clear ();
+            unit.Clear();
             int count = unitDB.data.Count;
             for (int i = 0; i < count; i++)
             {
-                Unit.Model model = new Unit.Model (unitDB.valueList[i]);
-                unit.Add ((int) unitDB.keyList[i], model);
+                Unit.Model model = new Unit.Model(unitDB.valueList[i]);
+                unit.Add((int)unitDB.keyList[i], model);
             }
-            Debug.Log ("<color=yellow>" + unit.Count + " units</color> has been <color=lime>Updated</color>.");
+            Debug.Log("<color=yellow>" + unit.Count + " units</color> has been <color=lime>Updated</color>.");
+
+            legion.Clear();
+            count = legionDB.data.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Legion.Model model = new Legion.Model(legionDB.valueList[i]);
+                // 判斷符合條件的軍團模板
+                legion.Add((int)legionDB.keyList[i], model);
+            }
         }
-        public void SynchronizeLegionsToPlayerData ()
+        public void InitializeReverseUnitFromDB()
         {
-            playerData.legions.Clear ();
+            playerData.reserve.Clear();
+            reserve.Clear();
+            List<int> keys = legion.Keys.ToList();
+            int countKey = keys.Count;
+            for (int i = 0; i < countKey; i++)
+            {
+                int index = keys[i];
+                if (index < 99000) continue; // 預備單位已經設定在 編號9900以上的軍團
+                int countSquadron = legion[index].Squadron.Count;
+                for (int order = 0; order < countSquadron; order++)
+                {
+                    int type = (int)legion[index].Squadron[order].Type;
+                    if (type == 0) // Empty
+                        continue;
+                    playerData.reserve.Add(legion[index].Squadron[order]);
+                    Unit.DataModel dataModel = new Unit.DataModel(unit[type], legion[index].Squadron[order]);
+                    reserve.Add(dataModel);
+                }
+            }
+        }
+        public void InitializeReverseUnitFromPlayer()
+        {
+            reserve.Clear();
+            int count = playerData.reserve.Count;
+            for (int order = 0; order < count; order++)
+            {
+                int type = playerData.reserve[order].Type;
+                Unit.DataModel dataModel = new Unit.DataModel(unit[type], playerData.reserve[order]);
+                reserve.Add(dataModel);
+            }
+        }
+        public void SynchronizeLegionsToPlayerData()
+        {
+            playerData.legions.Clear();
             Dictionary<int, Legion.Info> legions = legionDB.data;
-            List<int> keys = legions.Keys.ToList ();
+            List<int> keys = legions.Keys.ToList();
             int dataCount = keys.Count;
             for (int index = 0; index < dataCount; index++)
             {
                 int id = keys[index];
-                Legion.Data legion = new Legion.Data (id);
-                if (playerData.legions.ContainsKey (id))
+                Legion.Data legion = new Legion.Data(id);
+                if (playerData.legions.ContainsKey(id))
                     playerData.legions[id] = legion;
                 else
-                    playerData.legions.Add (id, legion);
+                    playerData.legions.Add(id, legion);
 
                 for (int order = 0; order < legions[id].m_squadron.Length; order++)
                 {
-                    int type = (int) legions[id].m_squadron[order].type;
+                    int type = (int)legions[id].m_squadron[order].type;
                     if (type == 0)
                         continue;
-                    Unit.Data unit = new Unit.Data ();
+                    Unit.Data unit = new Unit.Data();
                     unit.Type = type;
                     unit.HP = legions[id].m_squadron[order].HP;
                     // unit.Level = legions[id].m_squadron[order].HP;
                     // unit.Exp = legions[id].m_squadron[order].HP;
-                    legion.squadron.Add (order, unit);
+                    legion.squadron.Add(order, unit);
                 }
             }
         }
-        public void SynchronizeLegionToPlayerData (int index)
+        public void SynchronizeLegionToPlayerData(int index)
         {
             Dictionary<int, Legion.Info> legions = legionDB.data;
             int id = index;
-            Legion.Data legion = new Legion.Data (id);
-            if (playerData.legions.ContainsKey (id))
+            Legion.Data legion = new Legion.Data(id);
+            if (playerData.legions.ContainsKey(id))
                 playerData.legions[id] = legion;
             else
-                playerData.legions.Add (id, legion);
+                playerData.legions.Add(id, legion);
 
             for (int order = 0; order < legions[id].m_squadron.Length; order++)
             {
-                int type = (int) legions[id].m_squadron[order].type;
+                int type = (int)legions[id].m_squadron[order].type;
                 if (type == 0)
                     continue;
-                Unit.Data unit = new Unit.Data ();
+                Unit.Data unit = new Unit.Data();
                 unit.Type = type;
                 unit.HP = legions[id].m_squadron[order].HP;
                 // unit.Level = legions[id].m_squadron[order].HP;
                 // unit.Exp = legions[id].m_squadron[order].HP;
-                legion.squadron.Add (order, unit);
+                legion.squadron.Add(order, unit);
             }
         }
-        public void SynchronizeLegionSquadronToPlayerData (int index, int order)
+        public void SynchronizeLegionSquadronToPlayerData(int index, int order)
         {
             Dictionary<int, Legion.Info> legions = legionDB.data;
             int id = index;
             Legion.Data legion;
-            if (playerData.legions.ContainsKey (id))
+            if (playerData.legions.ContainsKey(id))
             {
                 legion = playerData.legions[id];
-                legion.squadron.Remove (order);
+                legion.squadron.Remove(order);
             }
             else
             {
-                legion = new Legion.Data (id);
-                playerData.legions.Add (index, legion);
+                legion = new Legion.Data(id);
+                playerData.legions.Add(index, legion);
             }
-            int type = (int) legions[id].m_squadron[order].type;
-            Unit.Data unit = new Unit.Data ();
+            int type = (int)legions[id].m_squadron[order].type;
+            Unit.Data unit = new Unit.Data();
             unit.Type = type;
             unit.HP = legions[id].m_squadron[order].HP;
             // unit.Level = legions[id].m_squadron[order].HP;
             // unit.Exp = legions[id].m_squadron[order].HP;
-            legion.squadron.Add (order, unit);
+            legion.squadron.Add(order, unit);
         }
-        public void SynchronizeUnitsToPlayerData ()
+        public void SynchronizeUnitsToPlayerData()
         {
-            playerData.units.Clear ();
+            playerData.reserve.Clear();
             Dictionary<int, Legion.Info> legions = legionDB.data;
-            List<int> keys = legions.Keys.ToList ();
+            List<int> keys = legions.Keys.ToList();
             int dataCount = keys.Count;
             for (int index = 0; index < dataCount; index++)
             {
                 int id = keys[index];
-                if (id < 9900) continue; // 預備單位已經設定在 編號9900以上的軍團
+                if (id < 99000) continue; // 預備單位已經設定在 編號9900以上的軍團
 
                 for (int order = 0; order < legions[id].m_squadron.Length; order++)
                 {
-                    int type = (int) legions[id].m_squadron[order].type;
+                    int type = (int)legions[id].m_squadron[order].type;
                     if (type == 0)
                         continue;
-                    Unit.Data unit = new Unit.Data ();
+                    Unit.Data unit = new Unit.Data();
                     unit.Type = type;
                     unit.HP = legions[id].m_squadron[order].HP;
                     // unit.Level = legions[id].m_squadron[order].HP;
                     // unit.Exp = legions[id].m_squadron[order].HP;
-                    playerData.units.Add (unit);
+                    playerData.reserve.Add(unit);
                 }
             }
         }
-        public bool Save (int index)
+        public bool Save(int index)
         {
-            ConverseLegionData ();
-            ConverseUnitsData ();
+            ConverseLegionData();
+            ConverseUnitsData();
             string fileName = "Save" + index + ".wak";
-            BinaryFormatter bf = new BinaryFormatter ();
-            Stream s = File.Open (Application.dataPath + "/" + fileName, FileMode.Create);
-            bf.Serialize (s, playerData);
-            s.Close ();
-            Debug.Log ("<color=cyan>Save</color> " + fileName + " <color=lime>completed</color>");
+            BinaryFormatter bf = new BinaryFormatter();
+            Stream s = File.Open(Application.dataPath + "/" + fileName, FileMode.Create);
+            bf.Serialize(s, playerData);
+            s.Close();
+            Debug.Log("<color=cyan>Save</color> " + fileName + " <color=lime>completed</color>");
             return true;
         }
-        public bool Load (int index)
+        public bool Load(int index)
         {
             string fileName = "Save" + index + ".wak";
-            if (!System.IO.File.Exists (Application.dataPath + "/" + fileName))
+            if (!System.IO.File.Exists(Application.dataPath + "/" + fileName))
             {
-                Debug.LogWarning ("Bug");
+                Debug.LogWarning("Bug");
                 return false;
                 // System.IO.File.Create (Application.dataPath + "/" + fileName).Dispose ();
             }
-            BinaryFormatter bf = new BinaryFormatter ();
-            Stream s = File.Open (Application.dataPath + "/" + fileName, FileMode.Open);
-            playerData = (PlayerData) bf.Deserialize (s);
-            s.Close ();
-            Debug.Log ("<color=cyan>Load</color> " + fileName + " <color=lime>completed</color>");
-            ConverseLegionBattleModel ();
-            ConverseUnitsBattleModel ();
+            BinaryFormatter bf = new BinaryFormatter();
+            Stream s = File.Open(Application.dataPath + "/" + fileName, FileMode.Open);
+            playerData = (PlayerData)bf.Deserialize(s);
+            s.Close();
+            Debug.Log("<color=cyan>Load</color> " + fileName + " <color=lime>completed</color>");
+            playerData.Fix();
+            ConverseLegionBattleModel();
+            ConverseUnitsBattleModel();
             return true;
         }
-        public bool ConverseLegionBattleModel ()
+        public bool ConverseLegionBattleModel()
         {
-            legions.Clear ();
-            List<int> keys = playerData.legions.Keys.ToList ();
+            legions.Clear();
+            List<int> keys = playerData.legions.Keys.ToList();
             for (int index = 0; index < keys.Count; index++)
             {
-                Dictionary<int, Unit.Data> data = playerData.legions[keys[index]].squadron;;
-                Dictionary<int, Unit.BattleModel> squadron = new Dictionary<int, Unit.BattleModel> ();
+                Dictionary<int, Unit.Data> data = playerData.legions[keys[index]].squadron; ;
+                Dictionary<int, Unit.BattleModel> squadron = new Dictionary<int, Unit.BattleModel>();
                 for (int order = 0; order < 13; order++)
                 {
-                    if (data.ContainsKey (order))
+                    if (data.ContainsKey(order))
                     {
-                        Unit.BattleModel model = new Unit.BattleModel (order, unit[data[order].Type], data[order]);
-                        squadron.Add (order, model);
+                        Unit.BattleModel model = new Unit.BattleModel(order, unit[data[order].Type], data[order]);
+                        squadron.Add(order, model);
                     }
                 }
-                legions.Add (keys[index], new Legion.BattleModel (squadron));
+                legions.Add(keys[index], new Legion.BattleModel(squadron));
             }
             return true;
         }
-        public bool ConverseLegionData ()
+        public bool ConverseLegionData()
         {
-            playerData.legions.Clear ();
-            List<int> keys = legions.Keys.ToList ();
+            playerData.legions.Clear();
+            List<int> keys = legions.Keys.ToList();
             for (int index = 0; index < keys.Count; index++)
             {
-                Legion.Data legion = new Legion.Data (keys[index]);
+                Legion.Data legion = new Legion.Data(keys[index]);
                 Dictionary<int, Unit.BattleModel> data = legions[keys[index]].squadron;
                 for (int order = 0; order < 13; order++)
                 {
-                    if (data.ContainsKey (order))
-                        legion.squadron.Add (order, legions[keys[index]].squadron[order].data);
+                    if (data.ContainsKey(order))
+                        legion.squadron.Add(order, legions[keys[index]].squadron[order].data);
                 }
-                playerData.legions.Add (keys[index], legion);
+                playerData.legions.Add(keys[index], legion);
             }
             return true;
         }
-        public bool ConverseUnitsBattleModel ()
+        public bool ConverseUnitsBattleModel()
         {
-            listReserveUnit.Clear ();
-            List<Unit.Data> data = playerData.units;
+            reserveUnits.Clear();
+            List<Unit.Data> data = playerData.reserve;
             int count = data.Count;
             for (int index = 0; index < count; index++)
             {
-                listReserveUnit.Add (new Unit.BattleModel (-1, unit[data[index].Type], data[index]));
+                reserveUnits.Add(new Unit.BattleModel(-1, unit[data[index].Type], data[index]));
             }
             return true;
         }
-        public bool ConverseUnitsData ()
+        public bool ConverseUnitsData()
         {
-            playerData.units.Clear ();
-            int count = listReserveUnit.Count;
+            playerData.reserve.Clear();
+            int count = reserveUnits.Count;
             for (int index = 0; index < count; index++)
             {
-                playerData.units.Add (listReserveUnit[index].data);
+                playerData.reserve.Add(reserveUnits[index].data);
             }
             return true;
         }
-        public bool ConveseLegionModel<T, K> () where T : Unit.DataModel where K : Unit.DataModel
+        public bool ConveseLegionModel<T, K>() where T : Unit.DataModel where K : Unit.DataModel
         {
             return true;
         }
@@ -226,13 +273,19 @@ namespace Warfare
     [System.Serializable]
     public class PlayerData
     {
-        public Dictionary<int, Legion.Data> legions = new Dictionary<int, Legion.Data> ();
-        public List<Unit.Data> units = new List<Unit.Data> ();
+        public Dictionary<int, Legion.Data> legions = new Dictionary<int, Legion.Data>();
+        public List<Unit.Data> reserve = new List<Unit.Data>();
+
+        // 用於修復不同版本存檔 變數名詞不同
+        public void Fix()
+        {
+            //reserveNew = reserve
+        }
     }
 
     public static class Naming
     {
-        public static string Type (int type)
+        public static string Type(int type)
         {
             switch (type)
             {
@@ -349,7 +402,7 @@ namespace Warfare
             }
             return "";
         }
-        public static string Range (Unit.Range range)
+        public static string Range(Unit.Range range)
         {
             switch (range)
             {

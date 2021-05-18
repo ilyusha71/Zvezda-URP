@@ -10,49 +10,75 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccbba39eaad241747b645ed3ecbb89ce, type: 3}
-  m_Name: '[1000]Wakaka Legion 1'
+  m_Name: '[10000]Wakaka Legion 1'
   m_EditorClassIdentifier: 
-  m_index: 1000
+  m_index: 10000
+  m_legion: 0
   m_faction: 10
   m_type: 0
-  m_legion: 0
   m_squadron:
   - m_texture: {fileID: 2800000, guid: 51428305673cb7141905b763d2b9bc88, type: 3}
     type: 2062
-    m_percent: 0.59183675
+    info: {fileID: 11400000, guid: 83d2021ee4b53f141b2870df9143b58a, type: 2}
+    m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: 0e5c4215f05ae3f4493365d73cb3eb61, type: 3}
     type: 2021
-    m_percent: 0.24
+    info: {fileID: 11400000, guid: 00f6fa1004a1fc9499efb3032304e17e, type: 2}
+    m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: 305810749d6819446a3d4e8a4d5c14fc, type: 3}
     type: 2022
+    info: {fileID: 11400000, guid: 711252d746ad0d746919f7223d2998f4, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
+    info: {fileID: 0}
     m_percent: 0
+    level: 0
   - m_texture: {fileID: 2800000, guid: 2b733bd3bd50c564a9cdfd03063b3770, type: 3}
     type: 1151
+    info: {fileID: 11400000, guid: 9644d105be40fc44fb94a67534c546ff, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
+    info: {fileID: 0}
     m_percent: 0
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
+    info: {fileID: 0}
     m_percent: 0
+    level: 0
   - m_texture: {fileID: 2800000, guid: dfe79346031c5814b84ab8056c216787, type: 3}
     type: 1101
+    info: {fileID: 11400000, guid: 23ce326eb07f16f4eac002a16b4aa652, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: ddf738eeefd802347a713d9b37270c6c, type: 3}
     type: 1061
-    m_percent: 0.4
+    info: {fileID: 11400000, guid: a2d512511d3d6df44b42a6a4c848d9a3, type: 2}
+    m_percent: 1
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
+    info: {fileID: 0}
     m_percent: 0
+    level: 0
   - m_texture: {fileID: 2800000, guid: da409e56c8d3fa944856c2c0e1658351, type: 3}
     type: 1092
+    info: {fileID: 11400000, guid: 65019cb985e9b8c4cb0bbf891275f0bb, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: 745bfd722ba465b489730b492550aded, type: 3}
     type: 1091
+    info: {fileID: 11400000, guid: 54c30932dbc003743ab0667121426a6d, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
+    info: {fileID: 0}
     m_percent: 0
+    level: 0

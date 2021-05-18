@@ -13,59 +13,72 @@ MonoBehaviour:
   m_Name: '[2]Experimental Legion 3'
   m_EditorClassIdentifier: 
   m_index: 2
-  m_faction: 0
-  m_type: 0
   m_legion: 2
+  m_faction: 0
+  m_type: 2
   m_squadron:
   - m_texture: {fileID: 2800000, guid: 1090fedb0e26c40418e432c03c9a7e1f, type: 3}
     type: 1181
     info: {fileID: 11400000, guid: 77c11093207084b4199528cefe03b659, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: 5401312380d2ffe4aa125485e6cd5083, type: 3}
     type: 2061
     info: {fileID: 11400000, guid: e948c72174a15424593ba8ee44bc7530, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: d3ffef2578d80e74b83130c616b79446, type: 3}
     type: 2112
     info: {fileID: 11400000, guid: f83bba60a41eec7438dc2921f7787cd4, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: 5401312380d2ffe4aa125485e6cd5083, type: 3}
     type: 2061
     info: {fileID: 11400000, guid: e948c72174a15424593ba8ee44bc7530, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: 0e5c4215f05ae3f4493365d73cb3eb61, type: 3}
     type: 2021
     info: {fileID: 11400000, guid: 00f6fa1004a1fc9499efb3032304e17e, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: ccee50fa6ea9b6f49b18fcd3176bf778, type: 3}
     type: 2142
     info: {fileID: 11400000, guid: 6f1dc2141ec55784cbab9341225c7847, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: 51428305673cb7141905b763d2b9bc88, type: 3}
     type: 2062
     info: {fileID: 11400000, guid: 83d2021ee4b53f141b2870df9143b58a, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: a65642f1176bd2e488bffe6341713c4c, type: 3}
     type: 1111
     info: {fileID: 11400000, guid: 7eb017036c239c240ad41f34ff14cfdb, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 2800000, guid: ddf738eeefd802347a713d9b37270c6c, type: 3}
     type: 1061
     info: {fileID: 11400000, guid: a2d512511d3d6df44b42a6a4c848d9a3, type: 2}
     m_percent: 1
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
+    level: 0
   - m_texture: {fileID: 0}
     type: 0
     info: {fileID: 0}
     m_percent: 0
+    level: 0

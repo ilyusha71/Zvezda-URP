@@ -9,7 +9,7 @@ namespace Warfare.Legion
     {
         public WarfareManager warfare;
         public GridManager[] grids;
-        public int id = 1000;
+        public int id = 10000;
 
         [HeaderAttribute("UI Setting")]
         public Transform reserveGroup;
@@ -28,7 +28,7 @@ namespace Warfare.Legion
             rectTransform = reserveGroup.GetComponent<RectTransform>();
             scrollbar = reserveGroup.parent.GetComponentInChildren<Scrollbar>();
             // Debug.LogWarning(warfare.unit.Count);
-            warfare.InitializeUnitProperty();
+            warfare.InitializeModel();
             warfare.SynchronizeLegionsToPlayerData();
             warfare.SynchronizeUnitsToPlayerData();
             warfare.ConverseLegionBattleModel();
@@ -47,7 +47,7 @@ namespace Warfare.Legion
             {
                 if (Input.GetKeyDown((KeyCode)(k + 48)) || Input.GetKeyDown((KeyCode)(k + 256)))
                 {
-                    id = 1000 + k;
+                    id = 10000 + k;
                     CreateLegionUnit();
                 }
             }
@@ -67,7 +67,7 @@ namespace Warfare.Legion
                             {
                                 if (grid.Deploy(unitSelected))
                                 {
-                                    warfare.listReserveUnit.Remove(unitSelected);
+                                    warfare.reserveUnits.Remove(unitSelected);
                                     warfare.legions[id].squadron.Add(grid.Order, unitSelected);
                                     // warfare.playerData.units.Remove (unitSelected.data);
                                     // warfare.playerData.legions[id].squadron.Add (grid.Order, unitSelected.data);
@@ -93,7 +93,7 @@ namespace Warfare.Legion
                         }
                         else
                         {
-                            warfare.listReserveUnit.Add(grid.unit);
+                            warfare.reserveUnits.Add(grid.unit);
                             // warfare.playerData.units.Add (grid.unit.data);
                             RegisterReserveUnit(grid.unit);
                             ResetReserveGroup();
@@ -150,10 +150,10 @@ namespace Warfare.Legion
             }
             listReserveUnits.Clear();
 
-            count = warfare.listReserveUnit.Count;
+            count = warfare.reserveUnits.Count;
             for (int i = 0; i < count; i++)
             {
-                RegisterReserveUnit(warfare.listReserveUnit[i]);
+                RegisterReserveUnit(warfare.reserveUnits[i]);
             }
             ResetReserveGroup();
         }
