@@ -9,7 +9,7 @@ namespace Warfare.Legion
     {
         public WarfareManager warfare;
         public GridManager[] grids;
-        public int id = 10000;
+        public int id = 1000;
 
         [HeaderAttribute("UI Setting")]
         public Transform reserveGroup;
@@ -29,10 +29,11 @@ namespace Warfare.Legion
             scrollbar = reserveGroup.parent.GetComponentInChildren<Scrollbar>();
             // Debug.LogWarning(warfare.unit.Count);
             warfare.CreateModel();
+            warfare.GenerateLegionModelFromDB(10000, 1000);
             warfare.GenerateReverseUnitFromDB();
-            warfare.SynchronizeLegionsToPlayerData();
+            // warfare.SynchronizeLegionsToPlayerData();
             // warfare.SynchronizeUnitsToPlayerData();
-            warfare.ConverseLegionBattleModel();
+            // warfare.ConverseLegionBattleModel();
             // warfare.ConverseUnitsBattleModel();
         }
 
@@ -44,11 +45,35 @@ namespace Warfare.Legion
 
         void Update()
         {
+
+            // if (Input.GetKeyDown(KeyCode.Y))
+            // {
+            //     warfare.reserveUnits[0].Data.Exp = 5000;
+            //     warfare.reserveUnits[0].Model.Price = 9000;
+            //     Debug.Log("Change " + warfare.reserveUnits[0].Model.Type.ToString());
+            // }
+            // if (Input.GetKeyDown(KeyCode.O))
+            // {
+            //     Debug.Log("Show " + warfare.reserveUnits[0].Model.Type.ToString());
+            //     Debug.Log("Ori Data Exp " + warfare.reserveUnits[0].Data.Exp);
+            //     Debug.Log("Ori Model Price" + warfare.reserveUnits[0].Model.Price);
+            //     Debug.Log("Show " + warfare.reserveUnits[3].Model.Type.ToString());
+            //     Debug.Log("new Data Exp " + warfare.reserveUnits[3].Data.Exp);
+            //     Debug.Log("new Model Price " + warfare.reserveUnits[3].Model.Price);
+
+            //     Debug.Log("DB " + ((Unit.Type)warfare.legion[99000].Squadron[0].Type).ToString());
+            //     Debug.Log("DB Data Exp " + warfare.legion[99000].Squadron[0].Exp);
+
+            //     Debug.Log("Player " + ((Unit.Type)warfare.playerData.reserve[0].Type).ToString());
+            //     Debug.Log("Player Data Exp " + warfare.playerData.reserve[0].Exp);
+
+            // }
+
             for (int k = 0; k < 10; k++)
             {
                 if (Input.GetKeyDown((KeyCode)(k + 48)) || Input.GetKeyDown((KeyCode)(k + 256)))
                 {
-                    id = 10000 + k;
+                    id = 1000 + k;
                     CreateLegionUnit();
                 }
             }

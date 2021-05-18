@@ -68,6 +68,7 @@ namespace Warfare.Legion
     }
     public class DataModel<T>
     {
+        public int Id { get; private set; }
         public Dictionary<int, T> squadron = new Dictionary<int, T>();
         public DataModel() { }
         public DataModel(Dictionary<int, T> t)

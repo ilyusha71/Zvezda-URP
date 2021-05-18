@@ -207,6 +207,15 @@ namespace Warfare.Unit
         public int HP { get; set; } = 1;
         public int Level { get; set; } = 1;
         public int Exp { get; set; } = 0;
+        public Data Clone()
+        {
+            Data data = new Data();
+            data.Type = Type;
+            data.HP = HP;
+            data.Level = Level;
+            data.Exp = Exp;
+            return data;
+        }
     }
     public class DataModel
     {
