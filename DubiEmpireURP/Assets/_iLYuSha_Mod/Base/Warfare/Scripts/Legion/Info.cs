@@ -166,7 +166,7 @@ namespace Warfare.Legion
             else
             {
                 type = Unit.Type.None;
-                info = null;
+                // info = null;
                 model = null;
             }
             // Debug.Log("sd");
@@ -193,7 +193,7 @@ namespace Warfare.Legion
         {
             get
             {
-                return Stack * info.m_hp;
+                return Stack * model.HP;
             }
         }
     }

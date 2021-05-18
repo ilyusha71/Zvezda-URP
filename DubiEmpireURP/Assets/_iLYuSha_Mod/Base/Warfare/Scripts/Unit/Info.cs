@@ -184,6 +184,7 @@ namespace Warfare.Unit
             Range = info.m_range;
             Square = info.m_square;
             Formation = info.m_formation;
+            Debug.Log(Type.ToString() + " ok!");
         }
         public GameObject Instance { get; private set; }
         public Sprite Sprite { get; private set; }

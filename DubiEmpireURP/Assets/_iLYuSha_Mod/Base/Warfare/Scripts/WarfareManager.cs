@@ -12,6 +12,7 @@ namespace Warfare
         public Legion.Database legionDB;
         public Unit.Database unitDB;
         public PlayerData playerData;
+         [Header("Model")]
         public Dictionary<int, Unit.Model> unit = new Dictionary<int, Unit.Model> ();
         [Header("Play Mode")]
         public Dictionary<int, Legion.BattleModel> legions = new Dictionary<int, Legion.BattleModel> ();

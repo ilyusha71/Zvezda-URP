@@ -27,12 +27,12 @@ namespace Warfare.Legion
             gridLayout = reserveGroup.GetComponent<GridLayoutGroup>();
             rectTransform = reserveGroup.GetComponent<RectTransform>();
             scrollbar = reserveGroup.parent.GetComponentInChildren<Scrollbar>();
-            Debug.LogWarning(warfare.unit.Count);
-            // warfare.InitializeUnitProperty();
-            // warfare.SynchronizeLegionsToPlayerData();
-            // warfare.SynchronizeUnitsToPlayerData();
-            // warfare.ConverseLegionBattleModel();
-            // warfare.ConverseUnitsBattleModel();
+            // Debug.LogWarning(warfare.unit.Count);
+            warfare.InitializeUnitProperty();
+            warfare.SynchronizeLegionsToPlayerData();
+            warfare.SynchronizeUnitsToPlayerData();
+            warfare.ConverseLegionBattleModel();
+            warfare.ConverseUnitsBattleModel();
         }
 
         public void Start()
