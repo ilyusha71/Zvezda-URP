@@ -14,57 +14,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_index: 0
   m_faction: 0
+  m_type: 0
   m_legion: 0
   m_squadron:
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 2800000, guid: 2b733bd3bd50c564a9cdfd03063b3770, type: 3}
     type: 1151
     data: {fileID: 11400000, guid: 9644d105be40fc44fb94a67534c546ff, type: 2}
+    info: {fileID: 11400000, guid: 9644d105be40fc44fb94a67534c546ff, type: 2}
     m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 2800000, guid: ddf738eeefd802347a713d9b37270c6c, type: 3}
     type: 1061
     data: {fileID: 11400000, guid: a2d512511d3d6df44b42a6a4c848d9a3, type: 2}
+    info: {fileID: 11400000, guid: a2d512511d3d6df44b42a6a4c848d9a3, type: 2}
     m_percent: 0.2
   - m_texture: {fileID: 2800000, guid: fdc6d6abe93027d4eb263e650f5fddd3, type: 3}
     type: 1161
     data: {fileID: 11400000, guid: a5e386fe3daa5334e94667c18b5f57c2, type: 2}
+    info: {fileID: 11400000, guid: a5e386fe3daa5334e94667c18b5f57c2, type: 2}
     m_percent: 1
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 2800000, guid: 3834a3d9cf119ff4c87b3403fc2be392, type: 3}
     type: 1081
     data: {fileID: 11400000, guid: 3ca1d1c829d45004bb695dbc80dbe9c9, type: 2}
+    info: {fileID: 11400000, guid: 3ca1d1c829d45004bb695dbc80dbe9c9, type: 2}
     m_percent: 1
   - m_texture: {fileID: 2800000, guid: ffa31b47e9ae19249bc00444638861df, type: 3}
     type: 1201
     data: {fileID: 11400000, guid: 7ea8fe4a590450049bdd10e4932cf753, type: 2}
+    info: {fileID: 11400000, guid: 7ea8fe4a590450049bdd10e4932cf753, type: 2}
     m_percent: 1
   - m_texture: {fileID: 2800000, guid: 0e5c4215f05ae3f4493365d73cb3eb61, type: 3}
     type: 2021
     data: {fileID: 11400000, guid: 00f6fa1004a1fc9499efb3032304e17e, type: 2}
+    info: {fileID: 11400000, guid: 00f6fa1004a1fc9499efb3032304e17e, type: 2}
     m_percent: 0.4
   - m_texture: {fileID: 2800000, guid: ccee50fa6ea9b6f49b18fcd3176bf778, type: 3}
     type: 2142
     data: {fileID: 11400000, guid: 6f1dc2141ec55784cbab9341225c7847, type: 2}
+    info: {fileID: 11400000, guid: 6f1dc2141ec55784cbab9341225c7847, type: 2}
     m_percent: 0.5
   - m_texture: {fileID: 2800000, guid: 857fc1be070a11c46adb0d2ab28dc061, type: 3}
     type: 1071
     data: {fileID: 11400000, guid: 0364fb8df5cea224cb94ce65c80213f9, type: 2}
+    info: {fileID: 11400000, guid: 0364fb8df5cea224cb94ce65c80213f9, type: 2}
     m_percent: 0.6

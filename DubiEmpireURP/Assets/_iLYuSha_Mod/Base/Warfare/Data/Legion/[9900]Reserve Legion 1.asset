@@ -14,57 +14,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_index: 9900
   m_faction: 99
+  m_type: 0
   m_legion: 0
   m_squadron:
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 2800000, guid: 7966314454db6124e88e91a03b791530, type: 3}
     type: 1062
     data: {fileID: 11400000, guid: a236f6265dea7dc4a8de2820cfcc2149, type: 2}
+    info: {fileID: 11400000, guid: a236f6265dea7dc4a8de2820cfcc2149, type: 2}
     m_percent: 0.2
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 2800000, guid: 51428305673cb7141905b763d2b9bc88, type: 3}
     type: 2062
     data: {fileID: 11400000, guid: 83d2021ee4b53f141b2870df9143b58a, type: 2}
+    info: {fileID: 11400000, guid: 83d2021ee4b53f141b2870df9143b58a, type: 2}
     m_percent: 0.3265306
   - m_texture: {fileID: 2800000, guid: 5401312380d2ffe4aa125485e6cd5083, type: 3}
     type: 2061
     data: {fileID: 11400000, guid: e948c72174a15424593ba8ee44bc7530, type: 2}
+    info: {fileID: 11400000, guid: e948c72174a15424593ba8ee44bc7530, type: 2}
     m_percent: 0.19444445
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
   - m_texture: {fileID: 0}
     type: 0
     data: {fileID: 0}
+    info: {fileID: 0}
     m_percent: 0
