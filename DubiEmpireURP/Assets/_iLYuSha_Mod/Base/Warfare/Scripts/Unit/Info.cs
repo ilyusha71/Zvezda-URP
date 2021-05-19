@@ -185,7 +185,7 @@ namespace Warfare.Unit
         public GameObject Instance { get; private set; }
         public Sprite Sprite { get; private set; }
         public Type Type { get; private set; }
-        public int Price { get; private set; }
+        public int Price { get; set; }
         public int Hour { get; private set; }
         public int HP { get; private set; }
         public int FireRate { get; private set; }
@@ -207,6 +207,14 @@ namespace Warfare.Unit
         public int HP { get; set; } = 1;
         public int Level { get; set; } = 1;
         public int Exp { get; set; } = 0;
+
+        public Data() { }
+        public Data(Legion.Squadron squadron)
+        {
+            Type = (int)squadron.type;
+            HP = squadron.HP;
+            Level= squadron.Level;
+        }
         public Data Clone()
         {
             Data data = new Data();
@@ -219,6 +227,7 @@ namespace Warfare.Unit
     }
     public class DataModel
     {
+        public int order;
         public Data Data { get; set; }
         public Model Model { get; internal set; }
 
@@ -235,7 +244,6 @@ namespace Warfare.Unit
     }
     public class BattleModel : DataModel
     {
-        public int order;
         public Unit.BattleModel target;
         public int totalFire, totalAttackers, totalDamage;
         public Range hitRange;
@@ -247,12 +255,7 @@ namespace Warfare.Unit
             this.Data = data;
             this.Model = model;
         }
-        public BattleModel(int order, DataModel dm)
-        {
-            this.order = order;
-            this.Model = dm.Model;
-            this.Data = dm.Data;
-        }
+
         public bool Fire(int action, List<Unit.BattleModel>[] rangeList)
         {
             if (action % Model.FireRate != 0) return false;

@@ -33,34 +33,40 @@ namespace Warfare.Legion
     {
         public Model(Info info)
         {
-            Faction = info.m_faction;
-            Type = info.m_type;
-
-            for (int order = 0; order < info.m_squadron.Length; order++)
+            int size = info.m_squadron.Length;
+            for (int order = 0; order < size; order++)
             {
-                int type = (int)info.m_squadron[order].type;
-                if (type == 0)
-                    continue;
-                Unit.Data unit = new Unit.Data();
-                unit.Type = type;
-                unit.HP = info.m_squadron[order].HP;
-                unit.Level = info.m_squadron[order].Level;
-                Squadron.Add(order, unit);
+                Unit.Data unit = new Unit.Data(info.m_squadron[order]);
+                squadron.Add(order, unit);
             }
         }
-        public Faction Faction { get; private set; }
-        public Type Type { get; private set; }
-        public Dictionary<int, Unit.Data> Squadron = new Dictionary<int, Unit.Data>();
+        public Dictionary<int, Unit.Data> squadron = new Dictionary<int, Unit.Data>();
+        public Dictionary<int, Unit.Data> Clone()
+        {
+            Dictionary<int, Unit.Data> clone = new Dictionary<int, Unit.Data>();
+            int size = squadron.Count;
+            for (int order = 0; order < size; order++)
+            {
+                Unit.Data data = squadron[order].Clone();
+                squadron.Add(order, data);
+            }
+            return clone;
+        }
     }
     [System.Serializable]
     public class Data
     {
-        public int Faction { get; private set; }
-        public int Type { get; private set; }
-        public Dictionary<int, Unit.Data> squadron = new Dictionary<int, Unit.Data>();
-
-
         public int Id { get; private set; }
+        public Dictionary<int, Unit.Data> squadron;
+        public Data(int id, Dictionary<int, Unit.Data> squadron)
+        {
+            Id = id;
+            this.squadron = squadron;
+        }
+        public Data(Dictionary<int, Unit.Data> squadron)
+        {
+            this.squadron = squadron;
+        }
         public Data(int id)
         {
             Id = id;
@@ -69,7 +75,7 @@ namespace Warfare.Legion
     public class DataModel<T>
     {
         public int Id { get; private set; }
-        public Dictionary<int, T> squadron = new Dictionary<int, T>();
+        public Dictionary<int, T> squadron;
         public DataModel() { }
         public DataModel(Dictionary<int, T> t)
         {
@@ -85,6 +91,12 @@ namespace Warfare.Legion
         {
             this.squadron = t;
         }
+        public BattleModel Clone()
+        {
+            BattleModel newModel = new BattleModel(squadron);
+            return newModel;
+        }
+
         public void UpdateRangeList(int wave)
         {
             // Range list for enermy fire

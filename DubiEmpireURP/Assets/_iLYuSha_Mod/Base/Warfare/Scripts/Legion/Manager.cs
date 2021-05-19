@@ -29,8 +29,22 @@ namespace Warfare.Legion
             scrollbar = reserveGroup.parent.GetComponentInChildren<Scrollbar>();
             // Debug.LogWarning(warfare.unit.Count);
             warfare.CreateModel();
-            warfare.GenerateLegionModelFromDB(10000, 1000);
-            warfare.GenerateReverseUnitFromDB();
+            warfare.GenerateReverseUnitFromModel();
+            for (int i = 0; i < 20; i++)
+            {
+                warfare.GenerateLegionFromModel(1000 + i, 10000 + i);
+            }
+
+
+            // warfare.CreateModel();
+            // warfare.GenerateLegionFromModel(10000, 1000);
+            // for (int i = 0; i < 20; i++)
+            // {
+            //     warfare.GenerateLegionFromModel(10000 + i, 1000 + i);
+            // }
+            // warfare.GenerateReverseUnitFromDB();
+
+
             // warfare.SynchronizeLegionsToPlayerData();
             // warfare.SynchronizeUnitsToPlayerData();
             // warfare.ConverseLegionBattleModel();
@@ -45,6 +59,30 @@ namespace Warfare.Legion
 
         void Update()
         {
+            // if (Input.GetKeyDown(KeyCode.Y))
+            // {
+            //     warfare.legions[1000].squadron[0].Data.Exp = 5000;
+            //     warfare.legions[1000].squadron[0].Model.Price = 9000;
+            //     Debug.Log("Change " + warfare.legions[1000].squadron[0].Model.Type.ToString());
+            // }
+            // if (Input.GetKeyDown(KeyCode.O))
+            // {
+            //     Debug.Log("Show " + warfare.legions[1000].squadron[0].Model.Type.ToString());
+            //     Debug.Log("Ori Data Exp " + warfare.legions[1000].squadron[0].Data.Exp);
+            //     Debug.Log("Ori Model Price" + warfare.legions[1000].squadron[0].Model.Price);
+            //     Debug.Log("Show " + warfare.legions[1000].squadron[3].Model.Type.ToString());
+            //     Debug.Log("new Data Exp " + warfare.legions[1000].squadron[3].Data.Exp);
+            //     Debug.Log("new Model Price " + warfare.legions[1000].squadron[3].Model.Price);
+
+            //     Debug.Log("DB " + ((Unit.Type)warfare.legionsModel[10000].squadron[0].Model.Type).ToString());
+            //     Debug.Log("DB Data Exp " + warfare.legionsModel[10000].squadron[0].Data.Exp);
+
+            //     // Debug.Log("Player " + ((Unit.Type)warfare.playerData.reserve[0].Type).ToString());
+            //     // Debug.Log("Player Data Exp " + warfare.playerData.reserve[0].Exp);
+
+            // }
+
+
 
             // if (Input.GetKeyDown(KeyCode.Y))
             // {
