@@ -39,55 +39,50 @@ namespace Warfare.Legion
                 squadron.Add(unit);
             }
         }
-        public void Clone(Dictionary<int, Unit.Model> unitsModel, out Data oData, out Battle oBattle) // Option
-        {
-            oData = new Data(new Dictionary<int, Unit.Data>());
-            oBattle = new Battle(new Dictionary<int, Unit.Battle>());
-            for (int order = 0; order < Slot.size; order++)
-            {
-                int type = (int)squadron[order].Type;
-                if (type == 0) continue;
-                Unit.Data data = squadron[order].Clone();
-                Unit.Battle model = new Unit.Battle(unitsModel[type], data);
-                oData.data.Add(order, data);
-                oBattle.squadron.Add(order, model);
-            }
-        }
+        // Option
+        // public void Clone(Dictionary<int, Unit.Model> unitsModel, out Data oData, out Battle oBattle) 
+        // {
+        //     oData = new Data(new Dictionary<int, Unit.Data>());
+        //     oBattle = new Battle(new Dictionary<int, Unit.Battle>());
+        //     for (int order = 0; order < Slot.size; order++)
+        //     {
+        //         int type = (int)squadron[order].Type;
+        //         if (type == 0) continue;
+        //         Unit.Data data = squadron[order].Clone();
+        //         Unit.Battle model = new Unit.Battle(unitsModel[type], data);
+        //         oData.data.Add(order, data);
+        //         oBattle.squadron.Add(order, model);
+        //     }
+        // }
     }
     [System.Serializable]
     public class Data
     {
-        public Dictionary<int, Unit.Data> data = new Dictionary<int, Unit.Data>();
+        public Dictionary<int, Unit.Data> squadron = new Dictionary<int, Unit.Data>();
         public Data() { }
-        public Data(Dictionary<int, Unit.Data> data)
-        {
-            this.data = data;
-        }
-        public void Convert2Battle(Dictionary<int, Unit.Model> unitsModel, out Battle oBattle)
-        {
-            oBattle = new Battle(new Dictionary<int, Unit.Battle>());
-            for (int order = 0; order < Slot.size; order++)
-            {
-                if (!data.ContainsKey(order)) continue;
-                oBattle.squadron.Add(order, new Unit.Battle(unitsModel[data[order].Type], data[order]));
-            }
-        }
+        // public void Convert2Battle(Dictionary<int, Unit.Model> unitsModel, out Battle oBattle)
+        // {
+        //     oBattle = new Battle(new Dictionary<int, Unit.Battle>());
+        //     for (int order = 0; order < Slot.size; order++)
+        //     {
+        //         if (!data.ContainsKey(order)) continue;
+        //         oBattle.squadron.Add(order, new Unit.Battle(unitsModel[data[order].Type], data[order]));
+        //     }
+        // }
     }
-    public class DataModel<T>
+    public class Entity<T>
     {
-        public int Id { get; private set; }
         public Dictionary<int, T> squadron = new Dictionary<int, T>();
-        public DataModel() { }
-        public DataModel(Dictionary<int, T> t)
+        public Entity() { }
+        public Entity(Dictionary<int, T> t)
         {
             squadron = t;
         }
     }
-    public class ManageModel : DataModel<Unit.Entity> { }
-    public class Battle : DataModel<Unit.Battle>
+    public class Battle : Entity<Unit.Battle>
     {
         public List<Unit.Battle>[] rangeList = new List<Unit.Battle>[5];
-        public Battle(){}
+        public Battle() { }
         public Battle(Dictionary<int, Unit.Battle> t)
         {
             this.squadron = t;

@@ -46,10 +46,13 @@ namespace Warfare
         {
             windowTips.SetActive(false);
             warfare.CreateModel();
-            warfare.SynchronizeLegionsToPlayerData();
-            warfare.SynchronizeUnitsToPlayerData();
-            warfare.ConverseLegionBattleModel();
-            warfare.ConverseUnitsBattleModel();
+            warfare.CloneNewLegionFromModel(2, 2);
+            warfare.CloneNewLegionFromModel(3, 3);
+
+            // warfare.SynchronizeLegionsToPlayerData();
+            // warfare.SynchronizeUnitsToPlayerData();
+            // warfare.GenerateLegionUnitFromData();
+            // warfare.ConverseUnitsBattleModel();
             // warfare.Load (3);
             windowTips.SetActive(false);
             windowFight.SetActive(false);
@@ -59,7 +62,7 @@ namespace Warfare
         void Start()
         {
             onStart.Invoke();
-            battle = new BattleModel(warfare.legions[2], warfare.legions[3], grids);
+            battle = new BattleModel(warfare.playerEntity.legions[2], warfare.playerEntity.legions[3], grids);
             FormUp();
         }
 

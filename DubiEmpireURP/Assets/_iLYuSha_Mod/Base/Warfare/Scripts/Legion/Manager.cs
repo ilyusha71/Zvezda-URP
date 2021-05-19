@@ -29,23 +29,11 @@ namespace Warfare.Legion
             scrollbar = reserveGroup.parent.GetComponentInChildren<Scrollbar>();
             // Debug.LogWarning(warfare.unit.Count);
             warfare.CreateModel();
-            // warfare.GenerateReverseUnitFromModel();
+            warfare.GenerateReverseUnitFromModel();
             for (int i = 0; i < 20; i++)
             {
                 warfare.CloneNewLegionFromModel(1000 + i, 10000 + i);
             }
-
-            Debug.Log("N1 " + warfare.legions[1000].squadron[2].order);
-
-            // warfare.CreateModel();
-            // warfare.GenerateLegionFromModel(10000, 1000);
-            // for (int i = 0; i < 20; i++)
-            // {
-            //     warfare.GenerateLegionFromModel(10000 + i, 1000 + i);
-            // }
-            // warfare.GenerateReverseUnitFromDB();
-
-
             // warfare.SynchronizeLegionsToPlayerData();
             // warfare.SynchronizeUnitsToPlayerData();
             // warfare.ConverseLegionBattleModel();
@@ -56,34 +44,32 @@ namespace Warfare.Legion
         {
             CreateLegionUnit();
             CreateReserveUnit();
-            Debug.Log("N2 " + warfare.legions[1000].squadron[2].order);
-
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                warfare.legions[1000].squadron[0].Data.Exp = 5000;
-                warfare.legions[1000].squadron[0].Model.Price = 9000;
-                Debug.Log("Change " + warfare.legions[1000].squadron[0].Model.Type.ToString());
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                Debug.Log("Show " + warfare.legions[1000].squadron[0].Model.Type.ToString());
-                Debug.Log("Ori Data Exp " + warfare.legions[1000].squadron[0].Data.Exp);
-                Debug.Log("Ori Model Price" + warfare.legions[1000].squadron[0].Model.Price);
-                Debug.Log("Show " + warfare.legions[1000].squadron[3].Model.Type.ToString());
-                Debug.Log("new Data Exp " + warfare.legions[1000].squadron[3].Data.Exp);
-                Debug.Log("new Model Price " + warfare.legions[1000].squadron[3].Model.Price);
+            // if (Input.GetKeyDown(KeyCode.Y))
+            // {
+            //     warfare.playerEntity.legions[1000].squadron[0].Data.Exp = 5000;
+            //     warfare.playerEntity.legions[1000].squadron[0].Model.Price = 9000;
+            //     Debug.Log("Change " + warfare.playerEntity.legions[1000].squadron[0].Model.Type.ToString());
+            // }
+            // if (Input.GetKeyDown(KeyCode.O))
+            // {
+            //     Debug.Log("Show " + warfare.playerEntity.legions[1000].squadron[0].Model.Type.ToString());
+            //     Debug.Log("Ori Data Exp " + warfare.playerEntity.legions[1000].squadron[0].Data.Exp);
+            //     Debug.Log("Ori Model Price" + warfare.playerEntity.legions[1000].squadron[0].Model.Price);
+            //     Debug.Log("Show " + warfare.playerEntity.legions[1000].squadron[3].Model.Type.ToString());
+            //     Debug.Log("new Data Exp " + warfare.playerEntity.legions[1000].squadron[3].Data.Exp);
+            //     Debug.Log("new Model Price " + warfare.playerEntity.legions[1000].squadron[3].Model.Price);
 
-                Debug.Log("DB " + ((Unit.Type)warfare.legionsModel[10000].squadron[0].Type).ToString());
-                Debug.Log("DB Data Exp " + warfare.legionsModel[10000].squadron[0].Exp);
+            //     Debug.Log("DB " + ((Unit.Type)warfare.legionsModel[10000].squadron[0].Type).ToString());
+            //     Debug.Log("DB Data Exp " + warfare.legionsModel[10000].squadron[0].Exp);
 
-                Debug.Log("Player " + ((Unit.Type)warfare.playerData.legions[1000].data[0].Type).ToString());
-                Debug.Log("Player Data Exp " + warfare.playerData.legions[1000].data[0].Exp);
+            //     Debug.Log("Player " + ((Unit.Type)warfare.playerData.legions[1000].data[0].Type).ToString());
+            //     Debug.Log("Player Data Exp " + warfare.playerData.legions[1000].data[0].Exp);
 
-            }
+            // }
 
 
 
@@ -134,8 +120,8 @@ namespace Warfare.Legion
                             {
                                 if (grid.Deploy(unitSelected))
                                 {
-                                    warfare.reserve.Remove(unitSelected);
-                                    warfare.legions[id].squadron.Add(grid.Order, unitSelected);
+                                    warfare.playerEntity.reserve.Remove(unitSelected);
+                                    warfare.playerEntity.legions[id].squadron.Add(grid.Order, unitSelected);
                                     // warfare.playerData.units.Remove (unitSelected.data);
                                     // warfare.playerData.legions[id].squadron.Add (grid.Order, unitSelected.data);
                                     listReserveUnits.Remove(btnSelected);
@@ -160,11 +146,11 @@ namespace Warfare.Legion
                         }
                         else
                         {
-                            warfare.reserve.Add(grid.unit);
+                            warfare.playerEntity.reserve.Add(grid.unit);
                             // warfare.playerData.units.Add (grid.unit.data);
                             RegisterReserveUnit(grid.unit);
                             ResetReserveGroup();
-                            warfare.legions[id].squadron.Remove(grid.Order);
+                            warfare.playerEntity.legions[id].squadron.Remove(grid.Order);
                             // warfare.playerData.legions[id].squadron.Remove (grid.Order);
                             grid.Disarmament();
                         }
@@ -187,9 +173,9 @@ namespace Warfare.Legion
         // Legion Unit Grid
         public void CreateLegionUnit()
         {
-            if (warfare.legions.ContainsKey(id))
+            if (warfare.playerEntity.legions.ContainsKey(id))
             {
-                Dictionary<int, Unit.Battle> squadron = warfare.legions[id].squadron;
+                Dictionary<int, Unit.Battle> squadron = warfare.playerEntity.legions[id].squadron;
                 for (int order = 0; order < 13; order++)
                 {
                     grids[order].Disarmament();
@@ -217,10 +203,10 @@ namespace Warfare.Legion
             }
             listReserveUnits.Clear();
 
-            count = warfare.reserve.Count;
+            count = warfare.playerEntity.reserve.Count;
             for (int i = 0; i < count; i++)
             {
-                RegisterReserveUnit(warfare.reserve[i]);
+                RegisterReserveUnit(warfare.playerEntity.reserve[i]);
             }
             ResetReserveGroup();
         }
