@@ -18,7 +18,7 @@ namespace Warfare
         [HeaderAttribute("Battle")]
         public BattleModel battle;
         private int orderSelected;
-        private List<Unit.BattleModel> targetList;
+        private List<Unit.Battle> targetList;
         float nextActionRearrangeTime;
         float nextActionFireTime;
         float nextActionResultTime;

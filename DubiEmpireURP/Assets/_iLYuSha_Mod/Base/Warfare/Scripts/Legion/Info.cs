@@ -13,10 +13,9 @@ namespace Warfare.Legion
 
         public Faction m_faction;
         public Type m_type;
-        public Squadron[] m_squadron = new Squadron[13];
+        public Squadron[] m_squadron = new Squadron[Slot.size];
         // public int m_index; // Warning! This is legion model number (5 digits), not legion number (4 digits) in game.
         public int LegionModelNumber { get; private set; }
-
 
 #if UNITY_EDITOR
         public void JoinDatabase()
@@ -31,69 +30,71 @@ namespace Warfare.Legion
     }
     public class Model
     {
+        public List<Unit.Data> squadron = new List<Unit.Data>();
         public Model(Info info)
         {
-            int size = info.m_squadron.Length;
-            for (int order = 0; order < size; order++)
+            for (int slot = 0; slot < Slot.size; slot++)
             {
-                Unit.Data unit = new Unit.Data(info.m_squadron[order]);
-                squadron.Add(order, unit);
+                Unit.Data unit = new Unit.Data(info.m_squadron[slot]);
+                squadron.Add(unit);
             }
         }
-        public Dictionary<int, Unit.Data> squadron = new Dictionary<int, Unit.Data>();
-        public Dictionary<int, Unit.Data> Clone()
+        public void Clone(Dictionary<int, Unit.Model> unitsModel, out Data oData, out Battle oBattle) // Option
         {
-            Dictionary<int, Unit.Data> clone = new Dictionary<int, Unit.Data>();
-            int size = squadron.Count;
-            for (int order = 0; order < size; order++)
+            oData = new Data(new Dictionary<int, Unit.Data>());
+            oBattle = new Battle(new Dictionary<int, Unit.Battle>());
+            for (int order = 0; order < Slot.size; order++)
             {
+                int type = (int)squadron[order].Type;
+                if (type == 0) continue;
                 Unit.Data data = squadron[order].Clone();
-                squadron.Add(order, data);
+                Unit.Battle model = new Unit.Battle(unitsModel[type], data);
+                oData.data.Add(order, data);
+                oBattle.squadron.Add(order, model);
             }
-            return clone;
         }
     }
     [System.Serializable]
     public class Data
     {
-        public int Id { get; private set; }
-        public Dictionary<int, Unit.Data> squadron;
-        public Data(int id, Dictionary<int, Unit.Data> squadron)
+        public Dictionary<int, Unit.Data> data = new Dictionary<int, Unit.Data>();
+        public Data() { }
+        public Data(Dictionary<int, Unit.Data> data)
         {
-            Id = id;
-            this.squadron = squadron;
+            this.data = data;
         }
-        public Data(Dictionary<int, Unit.Data> squadron)
+        public void Convert2Battle(Dictionary<int, Unit.Model> unitsModel, out Battle oBattle)
         {
-            this.squadron = squadron;
-        }
-        public Data(int id)
-        {
-            Id = id;
+            oBattle = new Battle(new Dictionary<int, Unit.Battle>());
+            for (int order = 0; order < Slot.size; order++)
+            {
+                if (!data.ContainsKey(order)) continue;
+                oBattle.squadron.Add(order, new Unit.Battle(unitsModel[data[order].Type], data[order]));
+            }
         }
     }
     public class DataModel<T>
     {
         public int Id { get; private set; }
-        public Dictionary<int, T> squadron;
+        public Dictionary<int, T> squadron = new Dictionary<int, T>();
         public DataModel() { }
         public DataModel(Dictionary<int, T> t)
         {
             squadron = t;
         }
     }
-    public class ManageModel : DataModel<Unit.DataModel> { }
-
-    public class BattleModel : DataModel<Unit.BattleModel>
+    public class ManageModel : DataModel<Unit.Entity> { }
+    public class Battle : DataModel<Unit.Battle>
     {
-        public List<Unit.BattleModel>[] rangeList = new List<Unit.BattleModel>[5];
-        public BattleModel(Dictionary<int, Unit.BattleModel> t)
+        public List<Unit.Battle>[] rangeList = new List<Unit.Battle>[5];
+        public Battle(){}
+        public Battle(Dictionary<int, Unit.Battle> t)
         {
             this.squadron = t;
         }
-        public BattleModel Clone()
+        public Battle Clone()
         {
-            BattleModel newModel = new BattleModel(squadron);
+            Battle newModel = new Battle(squadron);
             return newModel;
         }
 
@@ -105,7 +106,7 @@ namespace Warfare.Legion
             // 2 = long range
             for (int i = 0; i < rangeList.Length; i++)
             {
-                rangeList[i] = new List<Unit.BattleModel>();
+                rangeList[i] = new List<Unit.Battle>();
                 rangeList[i].Clear();
             }
             int range = 0;
@@ -146,7 +147,6 @@ namespace Warfare.Legion
             }
         }
     }
-
     [System.Serializable]
     public class Squadron
     {

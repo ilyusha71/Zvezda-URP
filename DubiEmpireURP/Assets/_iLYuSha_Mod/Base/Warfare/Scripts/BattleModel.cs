@@ -3,18 +3,18 @@
     [System.Serializable]
     public class BattleModel
     {
-        public Legion.BattleModel[] legions = new Legion.BattleModel[2];
+        public Legion.Battle[] legions = new Legion.Battle[2];
         public GridManager[] grids;
         public bool quickBattle = false, isFinish = false;
         public int wave = 0, maxWave = 5, action = 0, maxAction = 30;
 
-        public BattleModel (Legion.BattleModel rightSide, Legion.BattleModel leftSide)
+        public BattleModel (Legion.Battle rightSide, Legion.Battle leftSide)
         {
             legions[0] = rightSide;
             legions[1] = leftSide;
             QuickBattle ();
         }
-        public BattleModel (Legion.BattleModel rightSide, Legion.BattleModel leftSide, GridManager[] grids)
+        public BattleModel (Legion.Battle rightSide, Legion.Battle leftSide, GridManager[] grids)
         {
             legions[0] = rightSide;
             legions[1] = leftSide;
@@ -63,7 +63,7 @@
                 {
                     if (legions[side].squadron.ContainsKey (order))
                     {
-                        Unit.BattleModel unit = legions[side].squadron[order];
+                        Unit.Battle unit = legions[side].squadron[order];
                         // Debug.LogWarning(wave + " / " + action + " / " + side + " / " + order);
                         if (unit.ActionResult ())
                         {

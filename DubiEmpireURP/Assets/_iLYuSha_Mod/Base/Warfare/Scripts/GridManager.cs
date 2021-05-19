@@ -13,7 +13,7 @@ namespace Warfare
         public int Order { get; private set; }
 
         [HeaderAttribute("Unit")]
-        public Unit.BattleModel unit;
+        public Unit.Battle unit;
         public Dictionary<int, GameObject> stacks = new Dictionary<int, GameObject>();
         [HeaderAttribute("Battle")]
         public bool isTarget;
@@ -157,7 +157,7 @@ namespace Warfare
             }
             unit = null;
         }
-        public bool Deploy(Unit.BattleModel unit)
+        public bool Deploy(Unit.Battle unit)
         {
             if (state != GridState.Deploy)
             {

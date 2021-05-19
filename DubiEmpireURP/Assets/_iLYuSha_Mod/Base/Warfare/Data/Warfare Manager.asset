@@ -15,4 +15,4 @@ MonoBehaviour:
   legionDB: {fileID: 11400000, guid: 2f4a8399e271aa64698639a64ff9bea3, type: 2}
   unitDB: {fileID: 11400000, guid: d2fc735c6d01abb4d86da345927ec285, type: 2}
   playerData:
-    units: []
+    reserve: []

@@ -164,8 +164,46 @@ namespace Warfare.Unit
         }
     }
     [System.Serializable]
+    public class Data
+    {
+        public int Type { get; set; }
+        public int HP { get; set; } = 1;
+        public int Level { get; set; } = 1;
+        public int Exp { get; set; } = 0;
+
+        public Data() { }
+        public Data(Legion.Squadron squadron)
+        {
+            Type = (int)squadron.type;
+            HP = Type == 0 ? 1 : squadron.HP;
+            Level = Type == 0 ? 1 : squadron.Level;
+        }
+        public Data Clone()
+        {
+            Data data = new Data();
+            data.Type = Type;
+            data.HP = HP;
+            data.Level = Level;
+            data.Exp = Exp;
+            return data;
+        }
+    }
+    [System.Serializable]
     public class Model
     {
+        public GameObject Instance { get; private set; }
+        public Sprite Sprite { get; private set; }
+        public Type Type { get; private set; }
+        public int Price { get; set; }
+        public int Hour { get; private set; }
+        public int HP { get; private set; }
+        public int FireRate { get; private set; }
+        public int[] ATK { get; private set; }
+        public Field Field { get; private set; }
+        public Anti Anti { get; private set; }
+        public Range Range { get; private set; }
+        public Square Square { get; private set; }
+        public Vector3[] Formation { get; private set; }
         public Model(Info info)
         {
             Instance = info.m_instance;
@@ -182,57 +220,19 @@ namespace Warfare.Unit
             Square = info.m_square;
             Formation = info.m_formation;
         }
-        public GameObject Instance { get; private set; }
-        public Sprite Sprite { get; private set; }
-        public Type Type { get; private set; }
-        public int Price { get; set; }
-        public int Hour { get; private set; }
-        public int HP { get; private set; }
-        public int FireRate { get; private set; }
-        public int[] ATK { get; private set; }
-        public Field Field { get; private set; }
-        public Anti Anti { get; private set; }
-        public Range Range { get; private set; }
-        public Square Square { get; private set; }
-        public Vector3[] Formation { get; private set; }
         public int UnitCount(float hp)
         {
             return Mathf.CeilToInt(hp / HP);
         }
     }
-    [System.Serializable]
-    public class Data
+    public class Entity
     {
-        public int Type { get; set; }
-        public int HP { get; set; } = 1;
-        public int Level { get; set; } = 1;
-        public int Exp { get; set; } = 0;
-
-        public Data() { }
-        public Data(Legion.Squadron squadron)
-        {
-            Type = (int)squadron.type;
-            HP = squadron.HP;
-            Level= squadron.Level;
-        }
-        public Data Clone()
-        {
-            Data data = new Data();
-            data.Type = Type;
-            data.HP = HP;
-            data.Level = Level;
-            data.Exp = Exp;
-            return data;
-        }
-    }
-    public class DataModel
-    {
-        public int order;
+        public int order; // Deploy 賦值
         public Data Data { get; set; }
         public Model Model { get; internal set; }
 
-        public DataModel() { }
-        public DataModel(Info info)
+        public Entity() { }
+        public Entity(Info info)
         {
             Data = new Data { Type = (int)info.m_type };
             Model = new Model(info);
@@ -242,21 +242,20 @@ namespace Warfare.Unit
             return Model.UnitCount(Data.HP);
         }
     }
-    public class BattleModel : DataModel
+    public class Battle : Entity
     {
-        public Unit.BattleModel target;
+        public Unit.Battle target;
         public int totalFire, totalAttackers, totalDamage;
         public Range hitRange;
         public int countDestroy, countHit;
 
-        public BattleModel(int order, Model model, Data data)
+        public Battle(Model model, Data data)
         {
-            this.order = order;
-            this.Data = data;
             this.Model = model;
+            this.Data = data;
         }
 
-        public bool Fire(int action, List<Unit.BattleModel>[] rangeList)
+        public bool Fire(int action, List<Unit.Battle>[] rangeList)
         {
             if (action % Model.FireRate != 0) return false;
             if (target != null)
@@ -269,7 +268,7 @@ namespace Warfare.Unit
                     target = rangeList[4][Random.Range(0, rangeList[3].Count)];
                 else
                 {
-                    List<Unit.BattleModel> list = rangeList[(int)Model.Range];
+                    List<Unit.Battle> list = rangeList[(int)Model.Range];
                     target = list[Random.Range(0, list.Count)];
                 }
             }

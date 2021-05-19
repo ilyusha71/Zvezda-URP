@@ -12,6 +12,7 @@ namespace Warfare
         public Legion.Database legionDB;
         public Unit.Database unitDB;
         public PlayerData playerData;
+        public PlayerEntity playerEntity;
         [Header("Model")]
         public Dictionary<int, Unit.Model> unitsModel = new Dictionary<int, Unit.Model>();
         public Dictionary<int, Legion.Model> legionsModel = new Dictionary<int, Legion.Model>();
@@ -22,8 +23,8 @@ namespace Warfare
         public Dictionary<int, Legion.Model> legion = new Dictionary<int, Legion.Model>();
 
         [Header("Play Mode")]
-        public Dictionary<int, Legion.BattleModel> legions = new Dictionary<int, Legion.BattleModel>();
-        public List<Unit.BattleModel> reserveUnits = new List<Unit.BattleModel>();
+        public Dictionary<int, Legion.Battle> legions = new Dictionary<int, Legion.Battle>();
+        public List<Unit.Battle> reserve = new List<Unit.Battle>();
 
         // public List<Unit.DataModel> reserve = new List<Unit.DataModel>(); // Legion.Manager
 
@@ -49,7 +50,7 @@ namespace Warfare
         }
         public void GenerateReverseUnitFromModel()
         {
-            reserveUnits.Clear();
+            reserve.Clear();
             playerData.reserve.Clear();
             foreach (KeyValuePair<int, Legion.Model> legion in legionsModel.ToList())
             {
@@ -60,85 +61,70 @@ namespace Warfare
                     Unit.Data data = legion.Value.squadron[order].Clone();
                     int type = data.Type;
                     if (type == 0) continue;
-                    Unit.BattleModel model = new Unit.BattleModel(-1, unitsModel[type], data); // -1 = reverse unit
+                    Unit.Battle model = new Unit.Battle(unitsModel[type], data); // -1 = reverse unit
                     playerData.reserve.Add(data);
-                    reserveUnits.Add(model);
+                    reserve.Add(model);
                 }
             }
         }
-        public void GenerateReverseUnitFromPlayer()
+        public bool GenerateReverseUnitFromPlayer()
         {
-            reserveUnits.Clear();
+            reserve.Clear();
             int count = playerData.reserve.Count;
             for (int order = 0; order < count; order++)
             {
                 Unit.Data data = playerData.reserve[order];
-                int type = data.Type;
-                Unit.BattleModel dataModel = new Unit.BattleModel(-1, unitsModel[type], data);
-                reserveUnits.Add(dataModel);
+                reserve.Add(new Unit.Battle(unitsModel[data.Type], data));
             }
+            return true;
         }
-        public void GenerateLegionFromModelOld(int id, int index)
+        public bool ConverseUnitsBattleModel()
         {
-            if (!legionsModelOld.ContainsKey(index)) return;
-            Legion.Squadron[] legion = legionsModelOld[index];
-            Dictionary<int, Unit.Data> squadronsData = new Dictionary<int, Unit.Data>();
-            Dictionary<int, Unit.BattleModel> squadronsModel = new Dictionary<int, Unit.BattleModel>();
-            Legion.Data legionData = new Legion.Data(squadronsData);
-            Legion.BattleModel legionModel = new Legion.BattleModel(squadronsModel);
-            playerData.legions.Add(id, legionData);
-            legions.Add(id, legionModel);
-
-            int size = legion.Length;
-            for (int order = 0; order < size; order++)
+            reserve.Clear();
+            List<Unit.Data> data = playerData.reserve;
+            int count = data.Count;
+            for (int index = 0; index < count; index++)
             {
-                Legion.Squadron squadron = legion[order];
-                int type = (int)squadron.type;
-                if (type == 0) continue;
-                Unit.Data data = new Unit.Data(squadron);
-                Unit.BattleModel model = new Unit.BattleModel(-1, unitsModel[type], data); // -1 = reverse unit
-                squadronsData.Add(order, data);
-                squadronsModel.Add(order, model);
+                reserve.Add(new Unit.Battle(unitsModel[data[index].Type], data[index]));
             }
-            Debug.Log("<color=yellow>" + id + " legion (model: " + index + ")</color> has been <color=lime>generated</color>.");
+            return true;
         }
-        public void GenerateLegionFromModel(int id, int index)
+        public void CloneNewLegionFromModel(int id, int index)
         {
-            // if (!legionsModel.ContainsKey(index)) return;
-            // Dictionary<int, Unit.Data> squadronsData = new Dictionary<int, Unit.Data>();
-            // Dictionary<int, Unit.BattleModel> squadronsModel = new Dictionary<int, Unit.BattleModel>();
-            // Legion.Data legionData = new Legion.Data(squadronsData);
-            // Legion.BattleModel legionModel = new Legion.BattleModel(squadronsModel);
-            // playerData.legions.Add(id, legionData);
-            // legions.Add(id, legionModel);
-
-            // Dictionary<int, Unit.Data> legion = legionsModel[index].Clone();
-            // int size = legion.Value.squadron.Count;
-            // for (int order = 0; order < size; order++)
-            // {
-            //     Unit.Data data = legion.Value.squadron[order].Clone();
-            //     int type = data.Type;
-            //     if (type == 0) continue;
-            //     Unit.BattleModel model = new Unit.BattleModel(-1, unitsModel[type], data); // -1 = reverse unit
-            //     playerData.reserve.Add(data);
-            //     reserveUnits.Add(model);
-            // }
-
-            // Legion.Squadron[] legion = legionsModelOld[index];
-            // int size = legion.Length;
-            // for (int order = 0; order < size; order++)
-            // {
-            //     Legion.Squadron squadron = legion[order];
-            //     int type = (int)squadron.type;
-            //     if (type == 0) continue;
-            //     Unit.Data data = new Unit.Data(squadron);
-            //     Unit.BattleModel model = new Unit.BattleModel(-1, unitsModel[type], data); // -1 = reverse unit
-            //     squadronsData.Add(order, data);
-            //     squadronsModel.Add(order, model);
-            // }
-            // Debug.Log("<color=yellow>" + id + " legion (model: " + index + ")</color> has been <color=lime>generated</color>.");
+            if (!legionsModel.ContainsKey(index)) return;
+            playerData.legions.Add(id, new Legion.Data());
+            legions.Add(id, new Legion.Battle());
+            List<Unit.Data> squadron = legionsModel[index].squadron;
+            for (int slot = 0; slot < Slot.size; slot++)
+            {
+                int type = (int)squadron[slot].Type;
+                if (type == 0) continue;
+                Unit.Data data = squadron[slot].Clone();
+                playerData.legions[id].data.Add(slot, data);
+                legions[id].squadron.Add(slot, new Unit.Battle(unitsModel[type], data));
+            }
+            Debug.Log("<color=yellow>" + id + " legion (model: " + index + ")</color> has been <color=lime>cloned</color>.");
         }
-
+        public bool ConverseLegionBattleModel()
+        {
+            legions.Clear();
+            List<int> keys = playerData.legions.Keys.ToList();
+            for (int index = 0; index < keys.Count; index++)
+            {
+                Dictionary<int, Unit.Data> data = playerData.legions[keys[index]].data; ;
+                Dictionary<int, Unit.Battle> squadron = new Dictionary<int, Unit.Battle>();
+                for (int order = 0; order < 13; order++)
+                {
+                    if (data.ContainsKey(order))
+                    {
+                        Unit.Battle model = new Unit.Battle(unitsModel[data[order].Type], data[order]);
+                        squadron.Add(order, model);
+                    }
+                }
+                legions.Add(keys[index], new Legion.Battle(squadron));
+            }
+            return true;
+        }
 
 
         // public void GenerateLegionFromDB(int index, int id)
@@ -227,7 +213,7 @@ namespace Warfare
             for (int index = 0; index < dataCount; index++)
             {
                 int id = keys[index];
-                Legion.Data legion = new Legion.Data(id);
+                Legion.Data legion = new Legion.Data();
                 if (playerData.legions.ContainsKey(id))
                     playerData.legions[id] = legion;
                 else
@@ -243,7 +229,7 @@ namespace Warfare
                     unit.HP = legions[id].m_squadron[order].HP;
                     // unit.Level = legions[id].m_squadron[order].HP;
                     // unit.Exp = legions[id].m_squadron[order].HP;
-                    legion.squadron.Add(order, unit);
+                    legion.data.Add(order, unit);
                 }
             }
         }
@@ -251,7 +237,7 @@ namespace Warfare
         {
             Dictionary<int, Legion.Info> legions = legionDB.data;
             int id = index;
-            Legion.Data legion = new Legion.Data(id);
+            Legion.Data legion = new Legion.Data();
             if (playerData.legions.ContainsKey(id))
                 playerData.legions[id] = legion;
             else
@@ -267,7 +253,7 @@ namespace Warfare
                 unit.HP = legions[id].m_squadron[order].HP;
                 // unit.Level = legions[id].m_squadron[order].HP;
                 // unit.Exp = legions[id].m_squadron[order].HP;
-                legion.squadron.Add(order, unit);
+                legion.data.Add(order, unit);
             }
         }
         public void SynchronizeLegionSquadronToPlayerData(int index, int order)
@@ -278,11 +264,11 @@ namespace Warfare
             if (playerData.legions.ContainsKey(id))
             {
                 legion = playerData.legions[id];
-                legion.squadron.Remove(order);
+                legion.data.Remove(order);
             }
             else
             {
-                legion = new Legion.Data(id);
+                legion = new Legion.Data();
                 playerData.legions.Add(index, legion);
             }
             int type = (int)legions[id].m_squadron[order].type;
@@ -291,7 +277,7 @@ namespace Warfare
             unit.HP = legions[id].m_squadron[order].HP;
             // unit.Level = legions[id].m_squadron[order].HP;
             // unit.Exp = legions[id].m_squadron[order].HP;
-            legion.squadron.Add(order, unit);
+            legion.data.Add(order, unit);
         }
         public void SynchronizeUnitsToPlayerData()
         {
@@ -349,69 +335,42 @@ namespace Warfare
             ConverseUnitsBattleModel();
             return true;
         }
-        public bool ConverseLegionBattleModel()
-        {
-            legions.Clear();
-            List<int> keys = playerData.legions.Keys.ToList();
-            for (int index = 0; index < keys.Count; index++)
-            {
-                Dictionary<int, Unit.Data> data = playerData.legions[keys[index]].squadron; ;
-                Dictionary<int, Unit.BattleModel> squadron = new Dictionary<int, Unit.BattleModel>();
-                for (int order = 0; order < 13; order++)
-                {
-                    if (data.ContainsKey(order))
-                    {
-                        Unit.BattleModel model = new Unit.BattleModel(order, unitsModel[data[order].Type], data[order]);
-                        squadron.Add(order, model);
-                    }
-                }
-                legions.Add(keys[index], new Legion.BattleModel(squadron));
-            }
-            return true;
-        }
+
         public bool ConverseLegionData()
         {
             playerData.legions.Clear();
             List<int> keys = legions.Keys.ToList();
             for (int index = 0; index < keys.Count; index++)
             {
-                Legion.Data legion = new Legion.Data(keys[index]);
-                Dictionary<int, Unit.BattleModel> data = legions[keys[index]].squadron;
+                Legion.Data legion = new Legion.Data();
+                Dictionary<int, Unit.Battle> data = legions[keys[index]].squadron;
                 for (int order = 0; order < 13; order++)
                 {
                     if (data.ContainsKey(order))
-                        legion.squadron.Add(order, legions[keys[index]].squadron[order].Data);
+                        legion.data.Add(order, legions[keys[index]].squadron[order].Data);
                 }
                 playerData.legions.Add(keys[index], legion);
             }
             return true;
         }
-        public bool ConverseUnitsBattleModel()
-        {
-            reserveUnits.Clear();
-            List<Unit.Data> data = playerData.reserve;
-            int count = data.Count;
-            for (int index = 0; index < count; index++)
-            {
-                reserveUnits.Add(new Unit.BattleModel(-1, unitsModel[data[index].Type], data[index]));
-            }
-            return true;
-        }
+
         public bool ConverseUnitsData()
         {
             playerData.reserve.Clear();
-            int count = reserveUnits.Count;
+            int count = reserve.Count;
             for (int index = 0; index < count; index++)
             {
-                playerData.reserve.Add(reserveUnits[index].Data);
+                playerData.reserve.Add(reserve[index].Data);
             }
             return true;
         }
-        public bool ConveseLegionModel<T, K>() where T : Unit.DataModel where K : Unit.DataModel
+        public bool ConveseLegionModel<T, K>() where T : Unit.Entity where K : Unit.Entity
         {
             return true;
         }
     }
+
+
 
     [System.Serializable]
     public class PlayerData
@@ -419,11 +378,16 @@ namespace Warfare
         public Dictionary<int, Legion.Data> legions = new Dictionary<int, Legion.Data>();
         public List<Unit.Data> reserve = new List<Unit.Data>();
 
-        // 用於修復不同版本存檔 變數名詞不同
         public void Fix()
         {
+            // 用於修復不同版本存檔 變數名詞不同
             //reserveNew = reserve
         }
+    }
+    public class PlayerEntity
+    {
+        public Dictionary<int, Legion.Battle> legions = new Dictionary<int, Legion.Battle>();
+        public List<Unit.Battle> reserve = new List<Unit.Battle>();
     }
 
     public static class Naming
@@ -558,5 +522,9 @@ namespace Warfare
             }
             return "";
         }
+    }
+    public static class Slot
+    {
+        public static readonly int size = 13;
     }
 }
